@@ -2,6 +2,7 @@ import { useReducer } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useState } from "react";
 import { Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 
 export default function AddEmployee() {
@@ -184,7 +185,7 @@ export default function AddEmployee() {
 
     const [info, dispatch] = useReducer(reducer, init);
     const [msg, setMsg] = useState("");
-
+    const navigate = useNavigate();
     //on change event
     const onInputChange = (name, value, dispatch) => {
         //validation logic
@@ -266,7 +267,23 @@ export default function AddEmployee() {
 
         }
         fetch("http://localhost:8080/empReg", reqOptions)
-            .then(resp => console.log(resp))
+        .then(resp => {if(resp.ok)
+            { 
+              return resp.text();
+            }
+          else
+            {
+           
+              throw  new Error("server error")  
+            }
+          })
+            .then(text => text.length ? JSON.parse(text):{})
+            .then(obj => {
+                const fd=new FormData();
+                alert("Reg successfull")
+                navigate("/admin_home")
+            })
+            .catch((error) =>  alert("server error try after some time"));
         //.then(data => setMsg(data))
     }
 

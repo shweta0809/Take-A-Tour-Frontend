@@ -40,7 +40,6 @@ export default function LoginComponent()
      fetch("http://localhost:8080/chkLogin",reqOptions)
      .then(resp => {if(resp.ok)
                       { 
-                        
                         return resp.text();
                       }
                     else
