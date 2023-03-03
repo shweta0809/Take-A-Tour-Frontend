@@ -233,9 +233,9 @@ export default function SignUpTouristComponent() {
 
 
     return (
-        <div className="c-signup">
+        <div className="c-signup ">
             <div className="c-signupform">
-                <Container>
+                <Container fluid>
 
                     <Row>
                         <Col md={{ span: 4, offset: 5 }} xs={{ span: 10, offset: 1 }}>

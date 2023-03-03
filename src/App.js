@@ -9,7 +9,7 @@ import HomeComponent from './components/HomeComponent';
 import SignUpTouristComponent from './components/SignUpTouristComponent';
 import { useSelector } from 'react-redux';
 import LogoutComponent from './components/LogoutComponent';
-import AddEmployeeComponent from './components/AddEmployeeComponent';
+import AddEmployee from './components/AddEmployeeComponent';
 
 
 function App() {
@@ -55,13 +55,14 @@ function App() {
         <Routes>
           <Route path="/" element={<HomeComponent />}></Route>
           <Route path="/login" element={<LoginComponent />}></Route>
-          <Route path="/admin_home" element={<AdminHome />}>   
-                 <Route path="home" element={<HomeComponent />}></Route>
-                 <Route path="addaccemp" element={<AddEmployeeComponent />}></Route>
-                 <Route path="logout" element={<LogoutComponent/>}></Route>
+          <Route path="/admin_home" element={<AdminHome />}>
+                <Route path="home" element={<HomeComponent />}></Route>
+                <Route path="addaccemp" element={<AddEmployee />}></Route>
+                <Route path="logout" element={<LogoutComponent/>}></Route>
           </Route>
+
           <Route path="/tourist_home" element={<TouristHome />}>
-                  <Route path="home" element={<HomeComponent />}></Route>
+                 <Route path="home" element={<HomeComponent />}></Route>
                  <Route path="" element={<HomeComponent />}></Route>
                  <Route path="logout" element={<LogoutComponent/>}></Route>
           </Route>

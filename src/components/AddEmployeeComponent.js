@@ -2,11 +2,15 @@ import { useReducer } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useState } from "react";
 import { Container } from "react-bootstrap";
+import emp from "../Images/emp3.jpg"
 import { useNavigate } from "react-router-dom";
+
 
 
 export default function AddEmployee() {
 
+
+    const navigate = useNavigate();
     const init =
     {
         uid: { value: "", hasError: true, touched: false, error: "" },
@@ -20,12 +24,11 @@ export default function AddEmployee() {
         e_designation: { value: "", hasError: true, touched: false, error: "" },
         e_contact: { value: "", hasError: true, touched: false, error: "" },
         e_adharno: { value: "", hasError: true, touched: false, error: "" },
-        e_mail: { value: "", hasError: true, touched: false, error: "" },
-        e_photo: { value: "", hasError: true, touched: false, error: "" },
+        e_email: { value: "", hasError: true, touched: false, error: "" },
         addressline: { value: "", hasError: true, touched: false, error: "" },
         district: { value: "", hasError: true, touched: false, error: "" },
         city: { value: "", hasError: true, touched: false, error: "" },
-        postalcode: { value: 0, hasError: true, touched: false, error: "" },
+        postalcode: { value: "", hasError: true, touched: false, error: "" },
         state: { value: "", hasError: true, touched: false, error: "" },
         country: { value: "", hasError: true, touched: false, error: "" },
         isFormValid: false
@@ -59,7 +62,7 @@ export default function AddEmployee() {
                 }
                 break;
             case "pwd":
-                let regex1 = /^(?=.[0-9])(?=.[A-Z])(?=.[!@#$%^&])[A-Za-z0-9!@#$%^&]{5,}$/;
+                let regex1 = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&])[A-Za-z0-9!@#$%^&*]{5,}$/;
 
                 if (!regex1.test(value)) {
                     hasError = true;
@@ -185,7 +188,8 @@ export default function AddEmployee() {
 
     const [info, dispatch] = useReducer(reducer, init);
     const [msg, setMsg] = useState("");
-    const navigate = useNavigate();
+    const [file, setFile] = useState();
+
     //on change event
     const onInputChange = (name, value, dispatch) => {
         //validation logic
@@ -242,7 +246,7 @@ export default function AddEmployee() {
         e.preventDefault();
         const reqOptions = {
             method: 'POST',
-            headers: { 'content-type': 'application/json' },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 uid: info.uid.value,
                 pwd: info.pwd.value,
@@ -256,7 +260,6 @@ export default function AddEmployee() {
                 e_email: info.e_email.value,
                 e_contact: info.e_contact.value,
                 e_adharno: info.e_adharno.value,
-                e_photo: info.e_photo.value,
                 addressline: info.addressline.value,
                 district: info.district.value,
                 city: info.city.value,
@@ -267,23 +270,49 @@ export default function AddEmployee() {
 
         }
         fetch("http://localhost:8080/empReg", reqOptions)
-        .then(resp => {if(resp.ok)
-            { 
-              return resp.text();
-            }
-          else
-            {
-           
-              throw  new Error("server error")  
-            }
-          })
-            .then(text => text.length ? JSON.parse(text):{})
-            .then(obj => {
-                const fd=new FormData();
-                alert("Reg successfull")
-                navigate("/admin_home")
+        .then(resp => {
+                
+                if (resp.ok) {
+                   
+                    return resp.text();
+                }
+                else {
+
+                    throw new Error("server error")
+                }
             })
-            .catch((error) =>  alert("server error try after some time"));
+            .then(text => text.length ? JSON.parse(text) : {})
+
+             
+            .then(obj => {
+                const fd = new FormData();
+                 fd.append("file", file);
+                const reqOptions1 =
+                {
+                    method: 'POST',
+                    //headers: { 'Content-Type': 'multipart/form-data' },
+                    body: fd
+                }
+               
+                // to check image is uploaded or not , employee_id sending as path variable
+                fetch("http://localhost:8080/uploadimage/"+obj.employee_id, reqOptions1)
+                    // .then(resp=>console.log(resp))
+                    .then(resp => resp.json())
+                    .then(obj => {
+                        if (obj) {
+                            alert("Reg successful.");
+                            navigate("/admin_home");
+                        }
+                        else {
+                            alert("Reg successful. but image uploading failure, try again");
+                            navigate("/admin_home");
+                        }
+                    })
+
+
+            })
+
+            .catch((error) => alert("server error try after some time"));
         //.then(data => setMsg(data))
     }
 
@@ -295,10 +324,13 @@ export default function AddEmployee() {
                 <Container>
 
                     <Row>
-                        <Col md={{ span: 4, offset: 5 }} xs={{ span: 10, offset: 1 }}>
+                        <Col md={{ span: 4 }}>
                             <div>
-                                <h1>Registration Form</h1>
+                                <h2>Registration Form</h2>
                             </div>
+                        </Col>
+                        <Col md={{ span: 4 }} xs={{ span: 10, offset: 1 }}>
+
                             <div>
 
                                 {/* <div className="d-flex justify-content-center table-responsive-md"> */}
@@ -383,20 +415,20 @@ export default function AddEmployee() {
                                             </tr>
 
                                             <tr>
-
-                                                <td >
-                                                    <input type="radio" name="e_gender" id="female" value="F"
-                                                        onChange={(e) => { onInputChange("e_gender", e.target.value, dispatch) }}
-                                                        onBlur={(e) => { onFocusOut("e_gender", e.target.value, dispatch) }} />
-                                                    <label for="Female">Female</label>
+                                                <td>
+                                                    <label className="form-check-label">Select Gender</label>
                                                 </td>
-                                           
 
                                                 <td >
-                                                    <input type="radio" name="e_gender" id="male" value="M"
+                                                    <input type="radio" name="e_gender" id="female" value="F" className="form-check-input"
                                                         onChange={(e) => { onInputChange("e_gender", e.target.value, dispatch) }}
                                                         onBlur={(e) => { onFocusOut("e_gender", e.target.value, dispatch) }} />
-                                                         <label for="Female">Male</label>
+                                                    <label for="Female" className="form-check-label">Female</label>
+                                                    <br></br>
+                                                    <input type="radio" name="e_gender" id="male" value="M" className="form-check-input"
+                                                        onChange={(e) => { onInputChange("e_gender", e.target.value, dispatch) }}
+                                                        onBlur={(e) => { onFocusOut("e_gender", e.target.value, dispatch) }} />
+                                                    <label for="male" className="form-check-label">Male  </label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -407,18 +439,20 @@ export default function AddEmployee() {
                                             <tr>
 
                                                 <td colSpan={2}>
-                                                    <input type="date" placeholder="birth date" name="e_bdate" id="e_bdate" value={info.e_bdate.value}
+                                                    <input type="text" placeholder="Birth date" name="e_bdate" id="e_bdate" value={info.e_bdate.value}
+                                                        onFocus={(e) => (e.target.type = "date")}
                                                         onChange={(e) => { onInputChange("e_bdate", e.target.value, dispatch) }}
-                                                        onBlur={(e) => { onFocusOut("e_bdate", e.target.value, dispatch) }}
+                                                        onBlur={(e) => { onFocusOut("e_bdate", e.target.value, dispatch, e.target.type = "text") }}
                                                         className="form-control form-control-sm" />
                                                 </td>
                                             </tr>
                                             <tr>
 
                                                 <td colSpan={2}>
-                                                    <input type="date" placeholder="hire date" name="e_hiredate" id="e_hiredate" value={info.e_hiredate.value}
+                                                    <input type="text" placeholder="Hire date" name="e_hiredate" id="e_hiredate" value={info.e_hiredate.value}
+                                                        onFocus={(e) => (e.target.type = "date")}
                                                         onChange={(e) => { onInputChange("e_hiredate", e.target.value, dispatch) }}
-                                                        onBlur={(e) => { onFocusOut("e_hiredate", e.target.value, dispatch) }}
+                                                        onBlur={(e) => { onFocusOut("e_hiredate", e.target.value, dispatch, e.target.type = "text") }}
                                                         className="form-control form-control-sm" />
                                                 </td>
                                             </tr>
@@ -458,15 +492,15 @@ export default function AddEmployee() {
                                             <tr>
 
                                                 <td colSpan={2}>
-                                                    <input type="text" placeholder="Email" name="e_mail" id="e_mail" value={info.e_mail.value}
-                                                        onChange={(e) => { onInputChange("e_mail", e.target.value, dispatch) }}
-                                                        onBlur={(e) => { onFocusOut("e_mail", e.target.value, dispatch) }}
+                                                    <input type="text" placeholder="Email" name="e_email" id="e_email" value={info.e_email.value}
+                                                        onChange={(e) => { onInputChange("e_email", e.target.value, dispatch) }}
+                                                        onBlur={(e) => { onFocusOut("e_email", e.target.value, dispatch) }}
                                                         className="form-control form-control-sm" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colSpan={2}>
-                                                    <p style={{ display: info.e_mail.touched && info.e_mail.hasError ? "block" : "none", color: "red" }}> {info.e_mail.error} </p>
+                                                    <p style={{ display: info.e_email.touched && info.e_email.hasError ? "block" : "none", color: "red" }}> {info.e_email.error} </p>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -528,9 +562,10 @@ export default function AddEmployee() {
                                             <tr>
 
                                                 <td colSpan={2}>
-                                                    <input type="number" placeholder="Postal Code" name="postalcode" id="postalcode" value={info.postalcode.value}
+                                                    <input type="text" placeholder="Postal Code" name="postalcode" id="postalcode" value={info.postalcode.value}
+                                                        onFocus={(e) => (e.target.type = "number")}
                                                         onChange={(e) => { onInputChange("postalcode", e.target.value, dispatch) }}
-                                                        onBlur={(e) => { onFocusOut("postalcode", e.target.value, dispatch) }}
+                                                        onBlur={(e) => { onFocusOut("postalcode", e.target.value, dispatch, e.target.type = "text") }}
                                                         className="form-control form-control-sm" />
                                                 </td>
                                             </tr>
@@ -569,9 +604,12 @@ export default function AddEmployee() {
                                                 </td>
                                             </tr>
                                             <tr>
-                                            <td colSpan={2}>
-                                            <input type="file" id="myfile" name="myfile"/>
-                                            </td>
+                                                <td colSpan={2}>
+                                                    <input type="file" id="e_photo" name="e_photo"
+                                                     onChange={(e) => { setFile(e.target.files[0]) }}
+                                                     onBlur={(e) => { setFile(e.target.files[0]) }}
+                                                     />
+                                                </td>
                                             </tr>
 
 
@@ -589,7 +627,8 @@ export default function AddEmployee() {
                                     </div>
                                 </form>
                             </div>
-                            <p>{JSON.stringify(info)}</p> 
+                            <p>{JSON.stringify(info)}</p>
+
                             {/* </div> */}
                         </Col>
                     </Row>
