@@ -26,10 +26,11 @@ useEffect( ()=>
           throw  new Error("server error")  
         }
       })
-    .then(text => text.length ? JSON.parse(text):{})
+    // .then(text => text.length ? JSON.parse(text):{})
     .then(obj =>  {
-        console.log(JSON.stringify(obj))
-        localStorage.setItem("loggedemployee",JSON.stringify(obj))
+        //console.log(JSON.stringify(obj))
+        //localStorage.setItem("loggedemployee",JSON.stringify(obj))
+        localStorage.setItem("loggedemployee",obj)
         setEmployee(obj);
     })
 
@@ -54,7 +55,7 @@ useEffect( ()=>
                             </li>
 
                             <li className="nav-item">
-                                <Link to="addpackage" className="c-navlink px-3">Profile</Link>
+                                <Link to="plantour" className="c-navlink px-3">Plan Tour</Link>
                             </li>
                             <li className="nav-item ">
                                 <Link to="logout" className="c-navlink px-3">Logout</Link>

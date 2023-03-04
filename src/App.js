@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import LogoutComponent from './components/LogoutComponent';
 import AddEmployee from './components/AddEmployeeComponent';
 import AddPackageComponent from './components/AddPackageComponent';
+import PlanTourComponent from './components/PlanTourComponent';
 
 
 function App() {
@@ -69,6 +70,7 @@ function App() {
           </Route>
           <Route path="/employee_home" element={<EmployeeHome />}>
                <Route path="addpackage" element={<AddPackageComponent/>}></Route>
+                <Route path="plantour" element={<PlanTourComponent/>}></Route>
                <Route path="logout" element={<LogoutComponent/>}></Route>
 
           </Route>

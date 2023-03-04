@@ -4,7 +4,8 @@ import { useState } from "react";
 import { Container } from "react-bootstrap";
 import emp from "../Images/emp3.jpg"
 import { useNavigate } from "react-router-dom";
-
+import '../CSS/Style.css';
+import emp2 from "../Images/emp2.png"
 
 
 export default function AddEmployee() {
@@ -320,18 +321,21 @@ export default function AddEmployee() {
 
     return (
         <div className="c-signup">
-            <div className="c-signupform">
+          
                 <Container>
 
                     <Row>
-                        <Col md={{ span: 4 }}>
-                            <div>
-                                <h2>Registration Form</h2>
+                    
+                        <Col md={{ span: 3 ,offset : 1 }} >
+                            <div className="c-addempheading">
+                                <h4>Employee Registration</h4>
+                                <img src={emp2} className="c-addempimgicon"></img>
+
                             </div>
                         </Col>
                         <Col md={{ span: 4 }} xs={{ span: 10, offset: 1 }}>
 
-                            <div>
+                            <div className="c-addempregform">
 
                                 {/* <div className="d-flex justify-content-center table-responsive-md"> */}
                                 <form >
@@ -631,9 +635,11 @@ export default function AddEmployee() {
 
                             {/* </div> */}
                         </Col>
+
                     </Row>
+                 
                 </Container>
-            </div>
+            
         </div>
     )
 }
