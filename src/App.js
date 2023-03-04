@@ -10,6 +10,7 @@ import SignUpTouristComponent from './components/SignUpTouristComponent';
 import { useSelector } from 'react-redux';
 import LogoutComponent from './components/LogoutComponent';
 import AddEmployee from './components/AddEmployeeComponent';
+import AddPackageComponent from './components/AddPackageComponent';
 
 
 function App() {
@@ -66,7 +67,13 @@ function App() {
                  <Route path="" element={<HomeComponent />}></Route>
                  <Route path="logout" element={<LogoutComponent/>}></Route>
           </Route>
-          <Route path="/employee_home" element={<EmployeeHome />}></Route>
+          <Route path="/employee_home" element={<EmployeeHome />}>
+               <Route path="addpackage" element={<AddPackageComponent/>}></Route>
+               <Route path="logout" element={<LogoutComponent/>}></Route>
+
+          </Route>
+
+
           <Route path="/signup" element={<SignUpTouristComponent />}></Route>
 
         </Routes>

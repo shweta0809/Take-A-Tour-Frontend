@@ -1,6 +1,39 @@
-import { Link, Route, Routes } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, Outlet, Route, Routes } from 'react-router-dom';
+import "../CSS/Style.css"
+
 export default function EmployeeHome()
 {
+       // here saving info of logged tourist
+const [employee , setEmployee] = useState(null);
+
+useEffect( ()=>
+{
+
+    // saving in login component , and fetch here
+    const loginid = JSON.parse(localStorage.getItem("loggedinfo")).login_id;
+    console.log("loginid : "+ loginid);
+
+    fetch("http://localhost:8080/employeegetbyid?eid="+loginid)
+    .then(resp => {if(resp.ok)
+        { 
+          
+          return resp.text();
+        }
+      else
+        {
+       
+          throw  new Error("server error")  
+        }
+      })
+    .then(text => text.length ? JSON.parse(text):{})
+    .then(obj =>  {
+        console.log(JSON.stringify(obj))
+        localStorage.setItem("loggedemployee",JSON.stringify(obj))
+        setEmployee(obj);
+    })
+
+} ,[])
     return(
         <div>
             <div >
@@ -21,7 +54,10 @@ export default function EmployeeHome()
                             </li>
 
                             <li className="nav-item">
-                                <Link to="profile" className="c-navlink px-3">Profile</Link>
+                                <Link to="addpackage" className="c-navlink px-3">Profile</Link>
+                            </li>
+                            <li className="nav-item ">
+                                <Link to="logout" className="c-navlink px-3">Logout</Link>
                             </li>
                         </ul>
                     </div>
@@ -30,7 +66,9 @@ export default function EmployeeHome()
             <h1>
                 Employee Home
             </h1>
-
+            <h1>Welcome {employee && employee.e_fname} {employee && employee.e_lname}</h1> 
+            <img src={`data:image/jpeg;base64,${employee && employee.e_photo}` }width="200" height="200" className='c-empaccphoto'/>
+    <Outlet/>
         </div>
 
     )
