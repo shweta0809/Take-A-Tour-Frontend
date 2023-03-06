@@ -3,8 +3,10 @@ import { Container } from "react-bootstrap";
 import "../CSS/Style.css";
 import { Row, Col } from "react-bootstrap";
 import beach from "../Images/beach.jpg";
-
+import { Slide } from "pure-react-carousel";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Link, useNavigate } from "react-router-dom";
+
 
 export default function DisplayPackageForEmp() {
 
@@ -26,6 +28,7 @@ export default function DisplayPackageForEmp() {
 
     const [toggle, setToggle] = useState({});
     const [isActive, setActive] = useState(false);
+    const navigate = useNavigate();
 
 
     function toggleFunction(id) {
@@ -34,11 +37,21 @@ export default function DisplayPackageForEmp() {
             [id]: !toggle[id],
         });
 
-
     }
 
+    // function goToplantour() {
+    //            navigate("plantour")
+    //  }
+
+
+     const goToplantour = (id) =>{
+        localStorage.setItem("packageidforplantour",id)
+        navigate("plantour")
+     }
+
     return (
-        <div>   
+        <div>
+           
             <Container fluid>
                 <Row>
                     <Col>
@@ -53,6 +66,7 @@ export default function DisplayPackageForEmp() {
                                 <th>Description</th>
                                 <th>Location</th>
                                 <th>Images</th>
+                                <th>Planned Tour</th>
                             </tr>
                             {
                                 allpackages.map(allpk => {
@@ -65,6 +79,7 @@ export default function DisplayPackageForEmp() {
 
                                         <td>{allpk.description}</td>
                                         <td>{allpk.locations}</td>
+                                      
                                     
 
                                         <td>
@@ -99,6 +114,13 @@ export default function DisplayPackageForEmp() {
                                                     <button className="btn  btn-block" id="c-dispimgbtn" onClick={() => toggleFunction(allpk.package_id)}>"Hide Images" </button>
                                                 </div>
                                                 <button className="btn  btn-block" id="c-dispimgbtn" onClick={() => toggleFunction(allpk.package_id)}>{toggle[allpk.package_id] ? "Hide Images" : "Show Images"}</button>
+                                        </td>
+                                        <td>
+               
+                                        <button className="btn  btn-block" id="c-dispimgbtn" onClick={() => goToplantour(allpk.package_id)}>Plan</button>
+                                                 {/* localStorage.setItem("loggedinfo",JSON.stringify(obj)) */}
+
+
                                         </td>
 
                                     </tr>

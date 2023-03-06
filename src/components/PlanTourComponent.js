@@ -1,17 +1,25 @@
 import { useEffect, useReducer, useState } from "react";
 import { Button } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function PlanTourComponent(){
 
   
     const [empId, setempId] = useState()
+    const [packageId, setPackageId] = useState()
     useEffect(()=> {
       //logic for getting a value from local storage stored under the key 'key'
-      const empid = JSON.parse(localStorage.getItem('loggedemployee')).employee_id;
+      const empid = (localStorage.getItem('EmployeeId'));
       console.log("Employee ID "+empid)
       setempId(empid)
+      const packageidses= (localStorage.getItem('packageidforplantour'));
+
+   
+      console.log("Package ID "+packageId)
+      
+      setPackageId(packageidses);
+   
     },[])
  
     
@@ -227,7 +235,7 @@ export default function PlanTourComponent(){
                         <Form.Group>
                         
                         <Form.Control className="mb-3" size = "lg" type="number" placeholder="packageidobj" name="packageidobj" id="packageidobj" 
-                                        value={1}
+                                        value={packageId}
                                         
                                         onBlur={(e) => { onFocusOut("packageidobj", e.target.value, dispatch) }}
                           />
@@ -244,6 +252,9 @@ export default function PlanTourComponent(){
             <Button variant="primary" type="submit"  onClick={(e)=>{sendData(e)}} disabled={info.isFormValid ? false : true} >
                Click here to Plan Tour
             </Button>
+            <button id="c-dispimgbtn">
+                <Link to="/employee_home" id="c-dispimgbtn">Close</Link>
+            </button>
           </Form>
           </div>
        </div>

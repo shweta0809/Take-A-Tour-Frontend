@@ -28,11 +28,14 @@ export default function EmployeeHome() {
               throw  new Error("server error")  
             }
           })
-        // .then(text => text.length ? JSON.parse(text):{})
+         .then(text => text.length ? JSON.parse(text):{})
         .then(obj =>  {
             //console.log(JSON.stringify(obj))
             //localStorage.setItem("loggedemployee",JSON.stringify(obj))
+            console.log(obj)
+            console.log("empid"+obj.employee_id)
             localStorage.setItem("loggedemployee",obj)
+            localStorage.setItem("EmployeeId",obj.employee_id)
             setEmployee(obj);
         })
     
@@ -86,7 +89,7 @@ export default function EmployeeHome() {
                     </div>
                 </Col>
             </Row>
-           
+            <Outlet />
             <Row>
                 <Col>
                 <DisplayPackageForEmp></DisplayPackageForEmp>
@@ -96,7 +99,7 @@ export default function EmployeeHome() {
             </Container>
          
             
-            <Outlet />
+            
          
         </div>
 

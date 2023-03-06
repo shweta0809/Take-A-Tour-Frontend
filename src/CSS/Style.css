@@ -145,12 +145,13 @@ input:hover {
 }
 
 #c-dispimgbtn{
+    padding-left: 20px;
     width: 150px;
     font-family: 400;
     font-size: larger;
     color: #ffffff;
     background-color: #B53389;
- 
+
 }
 
 /* .c-dispimages

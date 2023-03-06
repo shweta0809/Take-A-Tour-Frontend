@@ -619,11 +619,11 @@ export default function AddEmployee() {
 
                                             <tr>
                                                 <td >
-                                                    <button type="submit" id="btn1" disabled={info.isFormValid ? false : true} onClick={(e) => { sendData(e) }}
+                                                    <button type="submit"  id="c-allbtn1" disabled={info.isFormValid ? false : true} onClick={(e) => { sendData(e) }}
                                                         className="btn  btn-block  ">Register</button>
                                                 </td>
                                                 <td>
-                                                    <button type="reset" className="btn  btn-block  " id="btn1" onClick={() => { dispatch({ type: 'reset' }) }}  >Reset</button>
+                                                    <button type="reset" className="btn  btn-block  "  id="c-allbtn1" onClick={() => { dispatch({ type: 'reset' }) }}  >Reset</button>
                                                 </td>
                                             </tr>
                                         </table>
