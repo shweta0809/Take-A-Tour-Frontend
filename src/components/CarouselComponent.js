@@ -1,11 +1,10 @@
-
 import Carousel from 'react-bootstrap/Carousel';
 import goa from '../Images/Goa.jpg';
 import jaipur from '../Images/jaipur.jpg';
 import snow from '../Images/snow.jpeg';
 import mahal from '../Images/mahal.jpg';
 
-import '../CSS/CarouselStyle.css';
+import '../CSS/Style.css';
 
 
 function CarouselFadeExample() {
@@ -14,7 +13,7 @@ function CarouselFadeExample() {
     <Carousel fade>
       <Carousel.Item>
         <img
-          className="d-block w-100 c-img"
+          className="d-block w-100 c-Carouselimg"
           src={mahal}
           alt="First slide"
         />
@@ -25,7 +24,7 @@ function CarouselFadeExample() {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block w-100 c-img"
+          className="d-block w-100 c-Carouselimg"
           src={snow}
           alt="Second slide"
         />
@@ -37,7 +36,7 @@ function CarouselFadeExample() {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block w-100 c-img"
+          className="d-block w-100 c-Carouselimg"
           src={jaipur}
           alt="Third slide"
         />

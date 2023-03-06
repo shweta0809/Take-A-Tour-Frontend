@@ -1,5 +1,5 @@
 import { useReducer, useState } from 'react';
-import '../CSS/SignupStyle.css';
+import '../CSS/Style.css';
 import { Container, Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 
@@ -233,13 +233,13 @@ export default function SignUpTouristComponent() {
 
 
     return (
-        <div className="c-signup ">
-            <div className="c-signupform">
+        <div className="c-signup">
+            
                 <Container fluid>
 
                     <Row>
                         <Col md={{ span: 4, offset: 5 }} xs={{ span: 10, offset: 1 }}>
-                            <div>
+                            <div className='c-signupform'>
                                 <h1>Registration Form</h1>
                             </div>
                             <div>
@@ -421,11 +421,11 @@ export default function SignUpTouristComponent() {
                                             </tr>
                                             <tr>
                                                 <td >
-                                                    <button type="submit" id="btn1" disabled={info.isFormValid ? false : true} onClick={(e) => { sendData(e) }}
+                                                    <button type="submit" id="c-allbtn1" disabled={info.isFormValid ? false : true} onClick={(e) => { sendData(e) }}
                                                         className="btn  btn-block  ">Register</button>
                                                 </td>
                                                 <td>
-                                                    <button type="reset" className="btn  btn-block  " id="btn1" onClick={() => { dispatch({ type: 'reset' }) }}  >Reset</button>
+                                                    <button type="reset" className="btn  btn-block" id="c-allbtn1" onClick={() => { dispatch({ type: 'reset' }) }}  >Reset</button>
                                                 </td>
                                             </tr>
                                         </table>
@@ -438,7 +438,7 @@ export default function SignUpTouristComponent() {
                         </Col>
                     </Row>
                 </Container>
-            </div>
+            
         </div>
     )
 }

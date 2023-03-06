@@ -12,9 +12,11 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Merienda:wght@300&family=Sansita:ital@1&display=swap');
 
+.Container
+{
+   max-width: 100%; 
 
-
-
+}
 
 .c-signup {
     background-image: url("../Images/maldive1.jpg");
@@ -28,7 +30,7 @@
 
 
 
-#btn1 {
+#c-allbtn1 {
     width: 200px;
     font-family: 400;
     font-size: larger;
@@ -37,7 +39,7 @@
     margin-top: 15px;
 }
 
-#btn1:hover {
+#c-allbtn1:hover {
     background-color: #800080;
     box-shadow: 2px 3px 5px #B53389;
 }
@@ -105,7 +107,97 @@ input:hover {
 
 }
 
+/* ---------------------------------------------------------------------- */
+
+
 .c-empaccphoto
 {
     border-radius: 50%;
+}
+
+.c-empnavcolor
+{
+    background-image: url("../Images/beach.jpg");
+
+}
+
+.c-empwelcomeheading h5{
+
+    font-weight: 700;
+}
+
+.c-disppackagetable  tr  td, .c-disppackagetable tr th
+{
+    border: 1px solid black;
+    border-collapse: collapse;
+   
+}
+.c-disppackagetable td ,.c-disppackagetable th 
+{
+    padding: 15px;
+   
+}
+
+.c-disppackagetable 
+{
+   border: 2px solid black;
+
+}
+
+#c-dispimgbtn{
+    width: 150px;
+    font-family: 400;
+    font-size: larger;
+    color: #ffffff;
+    background-color: #B53389;
+ 
+}
+
+/* .c-dispimages
+{
+    align-items: center;
+     display: flex;
+   justify-content: center;
+    
+} */
+
+#c-dispimgbtn:hover {
+    background-color: #800080;
+    box-shadow: 2px 3px 5px #B53389;
+}
+
+ .c-disppackageimages
+{
+
+
+    border: 3px solid black;
+    background-color:black;
+    box-shadow: 10px 10px 8px gray;
+    border-radius: 5%;
+     position: fixed;
+     left : 5%;
+     top : 10%;
+     
+   /*align-items: center;
+     display: flex;
+   justify-content: center;  */
+   vertical-align: middle;
+
+
+}   
+
+
+.c-dispsingleimage
+{
+    border: 2px solid white;
+    border-radius: 5%;
+    padding: 2px; 
+    height: 500PX;
+    Width: 600px;
+    
+    
+} 
+
+.c-dispsingleimage img{
+    border-radius: 5%;
 }

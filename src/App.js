@@ -80,6 +80,7 @@ function App() {
 
         </Routes>
       </div>
+       {/* <Slideshow></Slideshow> */}
     </div>
   );
 }
