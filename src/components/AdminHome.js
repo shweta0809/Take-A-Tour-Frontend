@@ -2,6 +2,7 @@ import { Row,Col, Container } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../CSS/HomeStyle.css";
+import ApprovePlanTour from "./ApprovePlanTour";
 
 export default function AdminHome() {
     return (
@@ -40,7 +41,7 @@ export default function AdminHome() {
             </Row>
             </Container>
             <Outlet/>
-
+            <ApprovePlanTour/>
         </div>
 
     )

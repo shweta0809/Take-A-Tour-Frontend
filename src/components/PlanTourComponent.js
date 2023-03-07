@@ -33,6 +33,7 @@ export default function PlanTourComponent(){
         availseats:{ value: 0, hasError: false, touched: false, error: "" },
         employeeid:{ value: 0, hasError: false, touched: true, error: "" },
         packageidobj:{ value: 0, hasError: false, touched: true, error: "" },
+        status:0,
         isFormValid: false
        }
 
