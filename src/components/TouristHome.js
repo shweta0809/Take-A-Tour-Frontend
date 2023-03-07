@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
+import TouristPortal from './TouristPortal';
 
 export default function TouristHome() {
 
@@ -73,7 +74,7 @@ useEffect( ()=>
             {/* <h1>Welcome {tourist && tourist.t_fname} {tourist && tourist.t_lname}</h1>  */}
             <Outlet/>
 
-
+    <TouristPortal/>
 
 
         </div>

@@ -29,11 +29,10 @@ export default function PlanTourComponent(){
         startdate: { value: "", hasError: true, touched: false, error: "" },
         lastdate: { value: "", hasError: true, touched: false, error: "" }, 
         lastdate_apply: { value: "", hasError: false, touched: false, error: "" },
-        duration: { value: "", hasError: false, touched: false, error: "" },
-        availseats:{ value: 0, hasError: false, touched: false, error: "" },
+        duration: { value: "", hasError: false, touched: true, error: "" },
+        availseats:{ value: 0, hasError: true, touched: false, error: "" },
         employeeid:{ value: 0, hasError: false, touched: true, error: "" },
         packageidobj:{ value: 0, hasError: false, touched: true, error: "" },
-        status:0,
         isFormValid: false
        }
 
@@ -120,7 +119,7 @@ export default function PlanTourComponent(){
           duration: info.duration.value,
           availseats:info.availseats.value,
           employeeid:empId,
-          packageidobj:1,
+          packageidobj:packageId,
         })
      }
      fetch("http://localhost:8080/addPlannedTour",reqOptions)
@@ -150,6 +149,8 @@ export default function PlanTourComponent(){
 
     var startdate1=new Date(info.startdate.value)
     var lastdate1 = new Date(info.lastdate.value);
+    var duration1=(lastdate1-startdate1)/86400000
+    console.log("duration"+duration1)
     let todaysDate = new Date()
     console.log("todaysdate "+todaysDate)
     console.log("Startdate "+startdate1)
@@ -175,7 +176,14 @@ export default function PlanTourComponent(){
                 hasError = true;
                 error = "Last Date Should be greater than Starting date"
           }
-          
+          break;
+          case "availseats":
+            if(value<0)
+            {
+              hasError = true;
+                error = "Available seats should be greater than 0"
+            }
+            break;
            }
            return { hasError, error }
      }
@@ -216,14 +224,7 @@ export default function PlanTourComponent(){
                                         onBlur={(e) => { onFocusOut("lastdate_apply", e.target.value, dispatch) }}      
                                         required  /> 
                         </Form.Group>
-                        <Form.Group>
-                        
-                        <Form.Control className="mb-3" size = "lg" type="text" placeholder="duration" name="duration" id="duration" 
-                                        value={info.duration.value}
-                                        onChange={(e) => { onInputChange("duration", e.target.value, dispatch) }}
-                                        onBlur={(e) => { onFocusOut("duration", e.target.value, dispatch) }} 
-                           required />
-                        </Form.Group>
+
                         <Form.Group>
                         
                         <Form.Control className="mb-3" size = "lg" type="number" placeholder="availseats" name="availseats" id="availseats"
@@ -232,7 +233,17 @@ export default function PlanTourComponent(){
                                         onBlur={(e) => { onFocusOut("availseats", e.target.value, dispatch) }} 
                                         required/>
                         </Form.Group>
+                        <p style={{ display: info.availseats.touched && info.availseats.hasError ? "block" : "none", color: "red" }}> {info.availseats.error} </p>
+                          
                         <fieldset disabled>
+                        <Form.Group>
+                        
+                        <Form.Control className="mb-3" size = "lg" type="text" placeholder="duration" name="duration" id="duration" 
+                                        value={duration1}
+                                        // onChange={(e) => { onInputChange("duration", e.target.value, dispatch) }}
+                                        // onBlur={(e) => { onFocusOut("duration", e.target.value, dispatch) }} 
+                           required />
+                        </Form.Group>
                         <Form.Group>
                         
                         <Form.Control className="mb-3" size = "lg" type="number" placeholder="packageidobj" name="packageidobj" id="packageidobj" 
@@ -258,6 +269,7 @@ export default function PlanTourComponent(){
             </button>
           </Form>
           </div>
+
        </div>
       );
 }

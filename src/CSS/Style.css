@@ -202,3 +202,149 @@ input:hover {
 .c-dispsingleimage img{
     border-radius: 5%;
 }
+
+
+
+
+
+/*-------------------------------------------------------------------------------*/
+
+
+.c-TouristPortal
+{
+    height: 350px;
+    width: 300px;
+    box-shadow: 2px 2px 8px black;
+    margin-top: 50px;
+    /* border-radius: 5%; */
+    /* z-index: -1; */
+}
+
+.c-TouristPortal-1
+{
+/* display: inline-block; */
+    display: flex;
+    flex-wrap: wrap;
+    /* flex-direction: row; */
+    justify-content: space-around;
+
+}
+
+
+.c-touristpackageimages
+{
+    /* border: 3px solid #800080; */
+    margin: -20px;
+    /* background-color:black; */
+    box-shadow: 10px 10px 8px gray;
+    /* border-radius: 5%; */
+   object-fit: cover;
+   width: 270px;
+   margin-left: 5%;
+
+}   
+
+.c-touristsingleimage
+{
+    /* object-fit: cover; */
+    /* margin-top: -40px; */
+    height: 200px;
+    width: 100%;
+    /* padding: 15px; */
+    /* border-radius: 5%; */
+    overflow: visible;
+    z-index: 99;
+    
+}
+
+.c-card-content
+{
+    margin-top: 35px;
+}
+
+
+#c-dispimgbtn-tourist{
+
+    width: 120px;
+    font-family: 300;
+    font-size: medium;
+    color: #ffffff;
+    background-color: #B53389;
+    border:1px solid #B53389;
+}   
+
+#c-dispimgbtn-tourist:hover{
+    background-color: #800080;
+    box-shadow: 2px 3px 5px #B53389;
+}
+
+
+.c-packageallinfo
+{
+    border: 2px solid #25D366;
+    display: flex;
+    flex: wrap;
+    height: 450px;
+    width: 1050px;
+
+    /* background-color:#FFA836; */
+    /* background-color:#00FA9A; */
+    /* background-color: #25D366; */
+    /* background-color: #00A693; */
+    background-color: #D0F0C0;
+    
+    z-index: 999;
+    left: 78px;
+    justify-content: space-around;
+}
+
+.c-1divinfo
+{
+    /* border: 1px solid #800080; */
+    /* height: 100px; */
+    border-right:2px double #25D366 ;
+    width: 550px;
+}
+
+.c-2divinfo
+{
+    /* border: 1px solid yellow; */
+    /* height: 100px; */
+    width: 550px;
+  
+
+}
+
+
+#c-dispimgbtn-tourist1{
+
+    width: 150px;
+    font-family: 300;
+    font-size: medium;
+    color: #ffffff;
+    background-color: #B53389;
+    border:1px solid #B53389;
+    margin-left: 130px;
+    margin-right: 130px;
+}   
+
+#c-dispimgbtn-tourist1:hover{
+    background-color: #800080;
+    box-shadow: 2px 3px 5px #B53389;
+}
+
+.c-packagebtntourist
+{
+    display: flex;
+    flex: wrap;
+    text-align: center;
+    justify-content: center;
+}
+
+.c-mainpackageallinfo
+{
+    position: fixed;
+    top: 100px;
+    left: 150px;
+    z-index: 9999;
+}
