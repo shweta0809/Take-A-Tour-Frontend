@@ -5,12 +5,17 @@ import { useNavigate } from "react-router-dom";
 export default function ApprovePlanTour() {
 
     const [approvepack, setApprovepack] = useState([]);
-
+    const[msg,setMsg]=useState("")
     useEffect(() => {
         fetch("http://localhost:8080/getallplantour")
             .then(resp => resp.json())
             .then(pkgs => setApprovepack(pkgs))
 
+
+            if(approvepack.length == 0)
+            {
+                setMsg("No Packages to Approve")
+            }
     }, []);
 
 
@@ -22,7 +27,9 @@ console.log(approvepack)
         fetch("http://localhost:8080/approvetour?tid="+id)
         .then(resp => {if(resp.ok)
             { 
-                console.log(resp)
+                  console.log(resp)
+                  alert("Aprroved")
+                  
                   return resp.text();
             }
           else
@@ -84,7 +91,7 @@ console.log(approvepack)
                                 })
                             }
                         </table>
-
+                            <h3>{msg}</h3>
                     </Col>
                 </Row>
             </Container>
