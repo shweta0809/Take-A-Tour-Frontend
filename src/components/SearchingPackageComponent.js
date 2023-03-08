@@ -1,26 +1,44 @@
-import { useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Outlet, useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { BsCurrencyRupee } from "react-icons/bs";
+import Moment from "moment";
 export default function SearchingPackage() {
-  const [startdate, setStartDate] = useState("");
+  const [startdate, setStartDate] = useState();
+  const [location, setLocation] = useState();
+
   const [allpackages, setAllPackages] = useState([]);
 
-  //   useEffect(() => {
-  //     fetch("http://localhost:8080/getpackagesbydate")
-  //       .then((resp) => resp.json())
-  //       .then((pkgs) => setAllPackages(pkgs));
-  //   }, []);
-
+  useEffect(() => {
+    fetch("http://localhost:8080/getAllPackagesForTourist")
+      .then((resp) => resp.json())
+      .then((pkgs) => setAllPackages(pkgs));
+  }, []);
 
   const sendData = () => {
     console.log(startdate);
     fetch("http://localhost:8080/getpackagesbydate?sdate=" + startdate)
-      //.then(resp=>console.log(resp))
+      //.then(resp=>console.log(resp))     +"&locations="+location
       .then((resp) => resp.json())
       // .then(resp=>console.log(resp))
       .then((pkgs) => setAllPackages(pkgs));
+
+    // fetch("http://localhost:8080/getpackagesbylocation?location=" + location)
+    // //.then(resp=>console.log(resp))
+    // .then((resp) => resp.json())
+    // // .then(resp=>console.log(resp))
+    // .then((loc) => setLocation(loc));
+  };
+
+  const sendData1= () => {
+    console.log(startdate);
+   
+    fetch("http://localhost:8080/getpackagesbylocation?location=" + location)
+    //.then(resp=>console.log(resp))
+    .then((resp) => resp.json())
+    // .then(resp=>console.log(resp))
+    .then((pkgs) => setAllPackages(pkgs));
   };
 
   const [toggle, setToggle] = useState({});
@@ -29,34 +47,87 @@ export default function SearchingPackage() {
 
   function toggleFunction(id) {
     setToggle({
-        ...toggle,
-        [id]: !toggle[id],
+      ...toggle,
+      [id]: !toggle[id],
     });
-
-}
+  }
 
   return (
     <div>
-      <form>
-        <h1>Enter date to search package</h1>
-        <input
-          type="date"
-          name="startdate"
-          id="startdate"
-          onChange={(e) => {
-            setStartDate(e.target.value);
-          }}
-        ></input>
-        <button
-          type="button"
-          id="btn"
-          onClick={(e) => {
-            sendData(e);
-          }}
-        >
-          search
-        </button>
-      </form>
+      
+      <Container>
+      <Row>
+        <Col xs={12} md={6}>
+          <div className="Form-DateSearch">
+            <div>
+              <h4>Enter Date To Search</h4>
+              <div>
+                <Form>
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Control
+                      type="date"
+                      placeholder="Enter Date"
+                      name="startdate"
+                      id="startdate"
+                      onChange={(e) => {
+                        setStartDate(e.target.value);
+                      }}
+                    />
+                    {/* <Form.Text className="text-muted">
+                                    </Form.Text> */}
+                  </Form.Group>
+
+                  <Button
+                    id="btnsearch"
+                    type="button"
+                    onClick={(e) => {
+                      sendData1(e);
+                    }}
+                  >
+                    search by date
+                  </Button>
+                </Form>
+              </div>
+            </div>
+          </div>
+        </Col>
+
+        <Col xs={12} md={6}>
+          <div className="Form-DateSearch">
+            <div>
+              <h4>Enter Location To Search</h4>
+              <div>
+                <Form>
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter Location"
+                      name="location"
+                      id="location"
+                      onChange={(e) => {
+                        setLocation(e.target.value);
+                      }}
+                    />
+                    {/* <Form.Text className="text-muted">
+                                    </Form.Text> */}
+                  </Form.Group>
+
+                  <Button
+                    id="btnsearch"
+                    type="button"
+                    onClick={(e) => {
+                      sendData1(e);
+                    }}
+                  >
+                    search by location
+                  </Button>
+                </Form>
+              </div>
+            </div>
+          </div>
+        </Col>
+      </Row>
+      </Container>
       <h1>{startdate}</h1>
       <h1>Book Your Trips</h1>
       <div className="c-TouristPortal-1">
@@ -109,16 +180,21 @@ export default function SearchingPackage() {
                   <span>{allpk.lastdate_apply}</span>
                 </h6>
 
-                <button id="c-dispimgbtn-tourist" onClick={() => toggleFunction(allpk.tour_id)}>Show More</button>
+                <button
+                  id="c-dispimgbtn-tourist"
+                  onClick={() => toggleFunction(allpk.tour_id)}
+                >
+                  Show More
+                </button>
               </div>
 
-              <div className="c-mainpackageallinfo" style={{ display: toggle[allpk.tour_id] ? "block" : "none" }}>
+              <div
+                className="c-mainpackageallinfo"
+                style={{ display: toggle[allpk.tour_id] ? "block" : "none" }}
+              >
                 <div className="c-packageallinfo">
                   <div className="c-1divinfo">
-                    <table
-                      className="table border"
-                      border={1}
-                    >
+                    <table className="table border" border={1}>
                       <tr>
                         <td colspan={2}>
                           <h1>{allpk.packageidobj.packagename}</h1>
@@ -189,18 +265,26 @@ export default function SearchingPackage() {
                       </tr>
                     </table>
                   </div>
-                  <div className="c-2divinfo"><h3>description</h3>
-                  <div><h5>{allpk.packageidobj.description}</h5></div></div>
+                  <div className="c-2divinfo">
+                    <h3>description</h3>
+                    <div>
+                      <h5>{allpk.packageidobj.description}</h5>
+                    </div>
+                  </div>
                 </div>
                 <div className="c-packagebtntourist">
                    {" "}
                   <div>
-                    <button className="" id="c-dispimgbtn-tourist1" >
-                      Book Tour 
+                    <button className="" id="c-dispimgbtn-tourist1">
+                      Book Tour
                     </button>
                   </div>
                   <div>
-                    <button className="" id="c-dispimgbtn-tourist1" onClick={() => toggleFunction(allpk.tour_id)}>
+                    <button
+                      className=""
+                      id="c-dispimgbtn-tourist1"
+                      onClick={() => toggleFunction(allpk.tour_id)}
+                    >
                       Close
                     </button>
                   </div>
@@ -213,3 +297,48 @@ export default function SearchingPackage() {
     </div>
   );
 }
+
+
+
+
+
+{/* <div className="searchForm">
+      <div className="Form-DateSearch">
+      <form>
+        <label>Enter Date To Search &ensp;</label>
+        <input
+          type="date"
+          name="startdate"
+          id="startdate"
+          onChange={(e) => {
+            setStartDate(e.target.value);
+          }}
+        />
+        <button type="button" id="btnsearch" onClick={(e) => { sendData(e); }}> search by date
+        </button>
+        </form>
+        </div>
+        <div className="Form-LocationSearch">
+        <form>
+        <label>Enter Location To Search &ensp;</label>
+        <input
+          type="text"
+          name="location"
+          id="location"
+          placeholder="Enter Location"
+          onChange={(e) => {
+            setLocation(e.target.value);
+          }}
+        ></input>
+        <button
+          type="button"
+          id="btnsearch"
+          onClick={(e) => {
+            sendData(e);
+          }}
+        >
+          search by location
+        </button>
+      </form>
+      </div>
+      </div> */}

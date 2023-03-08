@@ -117,7 +117,7 @@ input:hover {
 
 .c-empnavcolor
 {
-    background-image: url("../Images/beach.jpg");
+    background-image: url("../Images/sunset.jpg");
 
 }
 
@@ -204,6 +204,72 @@ input:hover {
 }
 
 
+/* ------------------------------------------ */
+.c-footerdiv
+{
+    height:270px;
+    /* border: 3px solid black; */
+    margin : 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: 	#F0F0F0;
+}
+
+
+.c-footerdiv h1 ,.c-footerdiv h4, .c-footerdiv h4{
+    margin-bottom: 40px;
+}
+
+.c-footerdiv p {
+
+    justify-content: center;
+    width : 300px;
+}
+
+
+.c-footermainclass
+{
+  margin-top : 10px;
+    /* border : 1px solid palevioletred; */
+}
+
+/* .c-footerdescription
+{
+    border : 1px solid green;
+    height: 200px;
+    width : auto;
+} */
+
+.c-footericon 
+{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.c-footerdivthird
+{
+    height:270px;
+   
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: 	#F0F0F0;
+}
+
+.c-footecopyright
+{
+    height:50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: 	#F0F0F0;
+    padding-top: 12px;
+}
 
 
 
@@ -286,7 +352,7 @@ input:hover {
     flex: wrap;
     height: 450px;
     width: 1050px;
-
+    box-shadow: 10px 10px 12px gray;
     /* background-color:#FFA836; */
     /* background-color:#00FA9A; */
     /* background-color: #25D366; */
@@ -344,7 +410,41 @@ input:hover {
 .c-mainpackageallinfo
 {
     position: fixed;
-    top: 100px;
-    left: 150px;
+    top: 20%;
+    left: 16%;
     z-index: 9999;
+    
+}
+
+
+
+
+/*-----------------------------------------------------------*/ 
+
+.searchForm
+{
+    border: 1px solid black;
+   
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.Form-DateSearch
+{
+    height:270px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: 	#F0F0F0; */
+}
+
+#btnsearch
+{
+    /* padding-left: 20px; */
+    width: auto;
+    font-family: 300;
+    font-size: medium;
+    color: #ffffff;
+    background-color: #B53389;
+    border: 1px solid #B53389;
 }

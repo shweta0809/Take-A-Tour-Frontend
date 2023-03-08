@@ -2,6 +2,7 @@ import { useReducer, useState } from 'react';
 import '../CSS/Style.css';
 import { Container, Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 export default function SignUpTouristComponent() {
     const init =
@@ -15,7 +16,7 @@ export default function SignUpTouristComponent() {
         addressline: { value: "", hasError: true, touched: false, error: "" },
         district: { value: "", hasError: true, touched: false, error: "" },
         city: { value: "", hasError: true, touched: false, error: "" },
-        postalcode: { value: 0, hasError: true, touched: false, error: "" },
+        postalcode: { value: "", hasError: true, touched: false, error: "" },
         state: { value: "", hasError: true, touched: false, error: "" },
         country: { value: "", hasError: true, touched: false, error: "" },
         isFormValid: false
@@ -151,6 +152,7 @@ export default function SignUpTouristComponent() {
 
     const [info, dispatch] = useReducer(reducer, init);
     const [msg, setMsg] = useState("");
+    const navigate = useNavigate();
 
     //on change event
     const onInputChange = (name, value, dispatch) => {
@@ -226,8 +228,18 @@ export default function SignUpTouristComponent() {
 
         }
         fetch("http://localhost:8080/touristReg", reqOptions)
-            .then(resp => console.log(resp))
-        //.then(data => setMsg(data))
+        .then(resp => {if(resp.ok)
+            { 
+                alert("Regitration Successful")
+                navigate("/login")
+              return resp.text();
+            }
+          else
+            {
+           
+              throw  new Error("server error")  
+            }
+          })
     }
 
 
@@ -380,9 +392,10 @@ export default function SignUpTouristComponent() {
                                             <tr>
 
                                                 <td colSpan={2}>
-                                                    <input type="number" placeholder="Postal Code" name="postalcode" id="postalcode" value={info.postalcode.value}
-                                                        onChange={(e) => { onInputChange("postalcode", e.target.value, dispatch) }}
-                                                        onBlur={(e) => { onFocusOut("postalcode", e.target.value, dispatch) }}
+                                                    <input type="text" placeholder="Postal Code" name="postalcode" id="postalcode" value={info.postalcode.value}
+                                                        onFocus={(e) => (e.target.type = "number")}
+                                                       onChange={(e) => { onInputChange("postalcode", e.target.value, dispatch) }}
+                                                        onBlur={(e) => { onFocusOut("postalcode", e.target.value, dispatch, e.target.type = "text") }}
                                                         className="form-control form-control-sm" />
                                                 </td>
                                             </tr>

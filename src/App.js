@@ -58,7 +58,7 @@ function App() {
           <Route path="/" element={<HomeComponent />}></Route>
           <Route path="/login" element={<LoginComponent />}></Route>
           <Route path="/admin_home" element={<AdminHome />}>
-                <Route path="home" element={<HomeComponent />}></Route>
+                <Route path="home" element={<AdminHome />}></Route>
                 <Route path="addaccemp" element={<AddEmployee />}></Route>
                 <Route path="logout" element={<LogoutComponent/>}></Route>
           </Route>

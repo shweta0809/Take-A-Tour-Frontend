@@ -19,7 +19,7 @@ export default function AdminHome() {
                     <ul className="navbar-nav navbar-right ">
 
                         <li className="nav-item ">
-                            <Link to="home" className="c-navlink px-3">Home</Link>
+                            <Link to="  " className="c-navlink px-3">Home</Link>
                         </li>
                         <li className="nav-item ">
                             <Link to="addaccemp" className="c-navlink px-3">Add Employee</Link>

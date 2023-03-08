@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, FormLabel } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from "react-router-dom";
 
@@ -194,7 +194,7 @@ export default function PlanTourComponent(){
                       <Form>
              
                         <Form.Group>
-                        
+                        <Form.Label>Start date</Form.Label>
                         <Form.Control className="mb-3" size = "lg" type="date" 
                                         placeholder="startdate"  name="startdate" id="startdate" 
                                         value={info.startdate.value}

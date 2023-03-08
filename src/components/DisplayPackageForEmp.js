@@ -17,7 +17,7 @@ export default function DisplayPackageForEmp() {
             .then(resp => resp.json())
             .then(pkgs => setAllPackages(pkgs))
 
-    }, []);
+    },[] );// remove square brackets
 
 
     //const [isActive, setActive] = useState("false");
@@ -49,6 +49,22 @@ export default function DisplayPackageForEmp() {
         navigate("plantour")
      }
 
+     const deletePackage =(id) =>
+     {
+        fetch("http://localhost:8080/deletepackage?packid="+id)
+        .then(resp => {if(resp.ok)
+            { 
+                console.log(resp)
+                alert("Package deleted successfully")
+            }
+          else
+            {
+           
+              throw  new Error("server error")  
+            }
+          })
+     }
+
     return (
         <div>
            
@@ -67,6 +83,7 @@ export default function DisplayPackageForEmp() {
                                 <th>Location</th>
                                 <th>Images</th>
                                 <th>Planned Tour</th>
+                                <th>Delete Package</th>
                             </tr>
                             {
                                 allpackages.map(allpk => {
@@ -117,11 +134,16 @@ export default function DisplayPackageForEmp() {
                                         </td>
                                         <td>
                
-                                        <button className="btn  btn-block" id="c-dispimgbtn" onClick={() => goToplantour(allpk.package_id)}>Plan</button>
+                                            <button className="btn  btn-block" id="c-displanbtn" onClick={() => goToplantour(allpk.package_id)}>Plan</button>
                                                  {/* localStorage.setItem("loggedinfo",JSON.stringify(obj)) */}
-
-
                                         </td>
+                                         <td>
+                                            <button className="btn  btn-block" id="c-displanbtn" onClick={() => deletePackage(allpk.package_id)}>Delete</button>
+
+                                         </td>        
+                                        
+
+                                       
 
                                     </tr>
                                    
@@ -139,9 +161,6 @@ export default function DisplayPackageForEmp() {
 
     )
 }
-
-
-
 
 
 
