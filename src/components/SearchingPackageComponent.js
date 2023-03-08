@@ -81,7 +81,7 @@ export default function SearchingPackage() {
                     id="btnsearch"
                     type="button"
                     onClick={(e) => {
-                      sendData1(e);
+                      sendData(e);
                     }}
                   >
                     search by date
