@@ -52,17 +52,33 @@ export default function DisplayPackageForEmp() {
      const deletePackage =(id) =>
      {
         fetch("http://localhost:8080/deletepackage?packid="+id)
-        .then(resp => {if(resp.ok)
+        .then(resp => {
+            if(resp.ok)
             { 
                 console.log(resp)
-                alert("Package deleted successfully")
+               // alert("Package deleted successfully")
+                return resp.text();
             }
           else
             {
-           
+               
+
+               console.log("server error")
               throw  new Error("server error")  
             }
           })
+          .then(text => text.length ? JSON.parse(text):{})
+        .then(obj =>  {
+                console.log(obj);
+                
+                if(obj==null)
+                {
+                    alert("Package deleted successfully");
+                }
+                {
+                    alert("Tour is ongoing can not delete");
+                }
+        })
      }
 
     return (
@@ -84,12 +100,14 @@ export default function DisplayPackageForEmp() {
                                 <th>Images</th>
                                 <th>Planned Tour</th>
                                 <th>Delete Package</th>
+                               
+                            
                             </tr>
                             {
                                 allpackages.map(allpk => {
                                     return <tr>
                                         <td>{allpk.package_id}</td>
-                                        <td className="c-disppackname">{allpk.packagename}</td>
+                                        <td>{allpk.packagename}</td>
                                         <td>{allpk.packageprice}</td>
                                         <td>{allpk.duration}</td>
                                         <td>{allpk.tourist_capacity}</td>
@@ -142,7 +160,7 @@ export default function DisplayPackageForEmp() {
 
                                          </td>        
                                         
-
+         
                                        
 
                                     </tr>

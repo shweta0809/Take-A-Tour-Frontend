@@ -12,13 +12,13 @@ import store from '../src/components/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Provider store ={store}>
+  //<Provider store ={store}>
   <BrowserRouter>
    <React.StrictMode>
     <App />
    </React.StrictMode>
   </BrowserRouter>
-  </Provider>
+ // </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

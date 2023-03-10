@@ -2,14 +2,23 @@ import { Row,Col, Container } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../CSS/HomeStyle.css";
-import ApprovePlanTour from "./ApprovePlanTour";
+import { useSelector } from 'react-redux';
+import NavbarComponent from "./NavbarComponent";
+import ApprovePlanTour from "./ApprovePlanTourComponent";
 
 export default function AdminHome() {
+
+    const loggedst = (localStorage.getItem('loggedstatus'));
+    console.log("logged status "+loggedst)
+
+//     const mystate = useSelector((state) => state.logged);
+//   console.log(mystate);
     return (
         <div>
             <Container fluid >
           <Row>
-            <nav className="navbar navbar-expand-sm mb-3 c-navcolor">
+          {/* <NavbarComponent ></NavbarComponent> */}
+            <nav className="navbar navbar-expand-sm mb-3 c-navcolor" style={{ display: loggedst ? "block" : "none" }}>
                 <div className="container-fluid ">
 
                     <div className="c-webname">
@@ -19,7 +28,7 @@ export default function AdminHome() {
                     <ul className="navbar-nav navbar-right ">
 
                         <li className="nav-item ">
-                            <Link to="  " className="c-navlink px-3">Home</Link>
+                            <Link to="/admin_home" className="c-navlink px-3">Admin-Home</Link>
                         </li>
                         <li className="nav-item ">
                             <Link to="addaccemp" className="c-navlink px-3">Add Employee</Link>
@@ -40,8 +49,9 @@ export default function AdminHome() {
             </Col> */}
             </Row>
             </Container>
-            <Outlet/>
-            <ApprovePlanTour/>
+            <Outlet />  
+            < ApprovePlanTour/>
+
         </div>
 
     )

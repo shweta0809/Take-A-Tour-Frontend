@@ -228,7 +228,9 @@ export default function SignUpTouristComponent() {
 
         }
         fetch("http://localhost:8080/touristReg", reqOptions)
-        .then(resp => {if(resp.ok)
+           // .then(resp => console.log(resp))
+           //.then(data => setMsg(data))
+           .then(resp => {if(resp.ok)
             { 
                 alert("Regitration Successful")
                 navigate("/login")
@@ -241,6 +243,12 @@ export default function SignUpTouristComponent() {
             }
           })
     }
+
+    const gotoHome = () =>
+{
+   navigate("/");
+
+}
 
 
 
@@ -393,9 +401,9 @@ export default function SignUpTouristComponent() {
 
                                                 <td colSpan={2}>
                                                     <input type="text" placeholder="Postal Code" name="postalcode" id="postalcode" value={info.postalcode.value}
-                                                        onFocus={(e) => (e.target.type = "number")}
-                                                       onChange={(e) => { onInputChange("postalcode", e.target.value, dispatch) }}
-                                                        onBlur={(e) => { onFocusOut("postalcode", e.target.value, dispatch, e.target.type = "text") }}
+                                                    onFocus={(e) => (e.target.type = "number")}
+                                                        onChange={(e) => { onInputChange("postalcode", e.target.value, dispatch) }}
+                                                        onBlur={(e) => { onFocusOut("postalcode", e.target.value, dispatch.e.target.type="text") }}
                                                         className="form-control form-control-sm" />
                                                 </td>
                                             </tr>
@@ -440,7 +448,15 @@ export default function SignUpTouristComponent() {
                                                 <td>
                                                     <button type="reset" className="btn  btn-block" id="c-allbtn1" onClick={() => { dispatch({ type: 'reset' }) }}  >Reset</button>
                                                 </td>
+                                              
                                             </tr>
+                                            <tr>
+                                            <td colSpan={2}>
+                                                <button  className="btn  btn-block" id="c-allbtn1" onClick={()=>gotoHome()} >Back to Home</button>
+
+                                                </td>
+                                            </tr>
+
                                         </table>
 
                                     </div>

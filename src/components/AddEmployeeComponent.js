@@ -47,7 +47,28 @@ export default function AddEmployee() {
                     error = "Adhar no Should be of 12 digits Only"
                 }
                 break;
-
+            case "e_bdate":
+                     var todaysdate=new Date();
+                     var bdate=new Date(info.e_bdate.value)
+                    var year1=todaysdate.getFullYear();
+                    var birthyear=bdate.getFullYear();
+                     var age=(year1-birthyear);
+                     console.log(age )
+                    if (age<18) 
+                    {
+                        hasError = true;
+                        error = "Age Should be greater than 18"
+                    }
+                    break;
+            case "e_hiredate":
+                var todaysdate1=new Date();
+                var hiredate=new Date(info.e_hiredate.value)
+               if (hiredate>todaysdate) 
+               {
+                   hasError = true;
+                   error = "Hiredate Should be valid"
+               }
+               break;
             case "e_designation":
                 let regex13 = /^[A-Za-z]{1,15}$/;
                 if (!regex13.test(value)) {
@@ -451,6 +472,11 @@ export default function AddEmployee() {
                                                 </td>
                                             </tr>
                                             <tr>
+                                                <td colSpan={2}>
+                                                    <p style={{ display: info.e_bdate.touched && info.e_bdate.hasError ? "block" : "none", color: "red" }}> {info.e_bdate.error} </p>
+                                                </td>
+                                            </tr>
+                                            <tr>
 
                                                 <td colSpan={2}>
                                                     <input type="text" placeholder="Hire date" name="e_hiredate" id="e_hiredate" value={info.e_hiredate.value}
@@ -460,7 +486,11 @@ export default function AddEmployee() {
                                                         className="form-control form-control-sm" />
                                                 </td>
                                             </tr>
-
+                                            <tr>
+                                                <td colSpan={2}>
+                                                    <p style={{ display: info.e_hiredate.touched && info.e_hiredate.hasError ? "block" : "none", color: "red" }}> {info.e_hiredate.error} </p>
+                                                </td>
+                                            </tr>
                                             <tr>
 
                                                 <td colSpan={2}>

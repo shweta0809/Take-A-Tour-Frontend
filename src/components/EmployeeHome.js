@@ -1,49 +1,51 @@
 import { useEffect, useState } from 'react';
 import { Link, Outlet, Route, Routes } from 'react-router-dom';
 import "../CSS/Style.css"
-
+import DisplayPackageForEmp from './DisplayPackageForEmpComponent';
 import { Row,Col, Container } from 'react-bootstrap';
-import DisplayPackageForEmp from './DisplayPackageForEmp';
+import { useSelector } from 'react-redux';
 
 export default function EmployeeHome() {
     // here saving info of logged tourist
-    const [employee , setEmployee] = useState(null);
+    const [employee, setEmployee] = useState(null);
+    // const mystate = useSelector((state) => state.logged);
+    // console.log(mystate);
 
-    useEffect( ()=>
-    {
-    
+    useEffect(() => {
+
         // saving in login component , and fetch here
         const loginid = JSON.parse(localStorage.getItem("loggedinfo")).login_id;
-        console.log("loginid : "+ loginid);
-    
-        fetch("http://localhost:8080/employeegetbyid?eid="+loginid)
-        .then(resp => {if(resp.ok)
-            { 
-              
-              return resp.text();
-            }
-          else
-            {
-           
-              throw  new Error("server error")  
-            }
-          })
-         .then(text => text.length ? JSON.parse(text):{})
-        .then(obj =>  {
-            //console.log(JSON.stringify(obj))
-            //localStorage.setItem("loggedemployee",JSON.stringify(obj))
-            console.log(obj)
-            console.log("empid"+obj.employee_id)
-            localStorage.setItem("loggedemployee",obj)
-            localStorage.setItem("EmployeeId",obj.employee_id)
-            setEmployee(obj);
-        })
-    
-    } ,[])
+        console.log("loginid : " + loginid);
+
+        fetch("http://localhost:8080/employeegetbyid?eid=" + loginid)
+            .then(resp => {
+                if (resp.ok) {
+
+                    return resp.text();
+                }
+                else {
+
+                    throw new Error("server error")
+                }
+            })
+            .then(text => text.length ? JSON.parse(text) : {})
+            .then(obj => {
+                console.log(JSON.stringify(obj))
+                 localStorage.setItem("loggedemployee", JSON.stringify(obj))
+                 localStorage.setItem("EmployeeId",obj.employee_id)
+                // localStorage.setItem("loggedemployee",obj)
+                setEmployee(obj);
+
+            })
+
+    }, [])
+
+    const loggedst = (localStorage.getItem('loggedstatus'));
+    console.log("logged status "+loggedst)
     return (
         <div>
            
-           <div >
+            <div style={{ display: loggedst ? "block" : "none" }}>
                 <nav className="navbar navbar-expand-sm mb-3 c-empnavcolor">
                     <div className="container-fluid ">
 
@@ -60,9 +62,9 @@ export default function EmployeeHome() {
                             <li className="nav-item">
                                 <Link to="addpackage" className="c-navlink px-3">Add Package</Link>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <Link to="plantour" className="c-navlink px-3">Plan Tour</Link>
-                            </li>
+                            </li> */}
 
                             <li className="nav-item">
                                 <Link to="addpackage" className="c-navlink px-3">Profile</Link>
@@ -99,7 +101,7 @@ export default function EmployeeHome() {
             </Container>
          
             
-            
+           
          
         </div>
 

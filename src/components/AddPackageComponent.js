@@ -138,76 +138,78 @@ export default function AddPackageComponent() {
     }
 
   
-  return (
-    <div >
-      <div>
-        <h4>Add Package Form</h4>
+    return (
+      <div >
+        <div>
+          <h4>Add Package Form</h4>
+        </div>
+        <div class="d-flex justify-content-around">
+          <Form>
+  
+            <Form.Group>
+  
+              <Form.Control className="mb-3" size="lg" type="text"
+                placeholder="packagename" name="packagename" id="packagename"
+                onChange={(e) => { dispatch({ type: 'update', fld: "packagename", val: e.target.value }) }} required />
+            </Form.Group>
+            <Form.Group>
+  
+              <Form.Control className="mb-3" size="lg" type="number"
+                placeholder="packageprice" name="packageprice" id="packageprice"
+                onChange={(e) => { dispatch({ type: 'update', fld: "packageprice", val: e.target.value }) }} required />
+            </Form.Group>
+            <Form.Group>
+  
+              <Form.Control className="mb-3" size="lg" type="text" placeholder="duration" name="duration" id="duration"
+                onChange={(e) => { dispatch({ type: 'update', fld: "duration", val: e.target.value }) }} required />
+            </Form.Group>
+            <Form.Group>
+  
+              <Form.Control className="mb-3" size="lg" type="number" placeholder="tourist_capacity" name="tourist_capacity" id="tourist_capacity"
+                onChange={(e) => { dispatch({ type: 'update', fld: "tourist_capacity", val: e.target.value }) }} required />
+            </Form.Group>
+            <Form.Group>
+  
+              <Form.Control className="mb-3" size="lg" type="text" placeholder="description" name="description" id="description"
+                onChange={(e) => { dispatch({ type: 'update', fld: "description", val: e.target.value }) }} required />
+            </Form.Group>
+            <Form.Group>
+  
+              <Form.Control className="mb-3" size="lg" type="text" placeholder="locations" name="locations" id="locations"
+                onChange={(e) => { dispatch({ type: 'update', fld: "locations", val: e.target.value }) }} required />
+            </Form.Group>
+  
+  
+  
+  
+  
+            <Button variant="primary" type="submit" onClick={(e) => { sendDatapack(e) }} >
+              Click here to Add Package
+            </Button>
+          </Form>
+  
+          <Form>
+            <Form.Group>
+  
+              <Form.Control className="mb-3" size="lg" type="file" placeholder="packageimages" name="packageimages" id="packageimages"
+                onChange={(e) => { setFile(e.target.files[0]) }}
+                multiple required />
+            </Form.Group>
+  
+  
+            <Button variant="primary" type="submit" onClick={(e) => { sendDataimg(e) }} >
+              Click here to Add Package
+            </Button>
+  
+          </Form>
+        </div>
+  
+        {/* <button id="c-dispimgbtn">
+          <Link to="/employee_home" id="c-dispimgbtn">Close</Link>
+        </button> */}
+  
       </div>
-      <div class="d-flex justify-content-around">
-        <Form>
-
-          <Form.Group>
-
-            <Form.Control className="mb-3" size="lg" type="text"
-              placeholder="packagename" name="packagename" id="packagename"
-              onChange={(e) => { dispatch({ type: 'update', fld: "packagename", val: e.target.value }) }} required />
-          </Form.Group>
-          <Form.Group>
-
-            <Form.Control className="mb-3" size="lg" type="number"
-              placeholder="packageprice" name="packageprice" id="packageprice"
-              onChange={(e) => { dispatch({ type: 'update', fld: "packageprice", val: e.target.value }) }} required />
-          </Form.Group>
-          <Form.Group>
-
-            <Form.Control className="mb-3" size="lg" type="text" placeholder="duration" name="duration" id="duration"
-              onChange={(e) => { dispatch({ type: 'update', fld: "duration", val: e.target.value }) }} required />
-          </Form.Group>
-          <Form.Group>
-
-            <Form.Control className="mb-3" size="lg" type="number" placeholder="tourist_capacity" name="tourist_capacity" id="tourist_capacity"
-              onChange={(e) => { dispatch({ type: 'update', fld: "tourist_capacity", val: e.target.value }) }} required />
-          </Form.Group>
-          <Form.Group>
-
-            <Form.Control className="mb-3" size="lg" type="text" placeholder="description" name="description" id="description"
-              onChange={(e) => { dispatch({ type: 'update', fld: "description", val: e.target.value }) }} required />
-          </Form.Group>
-          <Form.Group>
-
-            <Form.Control className="mb-3" size="lg" type="text" placeholder="locations" name="locations" id="locations"
-              onChange={(e) => { dispatch({ type: 'update', fld: "locations", val: e.target.value }) }} required />
-          </Form.Group>
-
-
-
-
-
-          <Button variant="primary" type="submit" onClick={(e) => { sendDatapack(e) }} >
-            Click here to Add Package
-          </Button>
-        </Form>
-
-        <Form>
-          <Form.Group>
-
-            <Form.Control className="mb-3" size="lg" type="file" placeholder="packageimages" name="packageimages" id="packageimages"
-              onChange={(e) => { setFile(e.target.files[0]) }}
-              multiple required />
-          </Form.Group>
-
-
-          <Button variant="primary" type="submit" onClick={(e) => { sendDataimg(e) }} >
-            Click here to Add Package
-          </Button>
-
-        </Form>
-      </div>
-
-    </div>
-  );
-
-
+    );
 
 
 }

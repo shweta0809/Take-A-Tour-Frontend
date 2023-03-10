@@ -27,7 +27,7 @@ export default function LoginComponent()
    const [info,dispatch] =useReducer(reducer,init);
    const [msg,setMsg] = useState("")
    const navigate = useNavigate();
-   const reduxaction = useDispatch();
+  //  const reduxaction = useDispatch();
 
    const sendData = (e)=>
    {
@@ -40,6 +40,7 @@ export default function LoginComponent()
      fetch("http://localhost:8080/chkLogin",reqOptions)
      .then(resp => {if(resp.ok)
                       { 
+                        
                         return resp.text();
                       }
                     else
@@ -57,7 +58,9 @@ export default function LoginComponent()
               }
               else
               {
-                  reduxaction(login(true))
+                 // reduxaction(login(true))
+                  localStorage.setItem("loggedstatus",1)
+                  
                   // to keep info in key valye pair to use in session
                   localStorage.setItem("loggedinfo",JSON.stringify(obj))
                   console.log(JSON.stringify(obj));
@@ -77,7 +80,7 @@ export default function LoginComponent()
                     }
                     else if(obj.role_id.role_id===1)
                     {
-                      navigate("/tourist_home")
+                      navigate("/")
                       
                     }
                     else if(obj.role_id.role_id===3)
@@ -148,7 +151,18 @@ const resetBtn = () =>
     button.style.transform = 'translateX(0%)';
 
 }
-       
+ 
+const gotoforget = () =>
+{
+   navigate("/forget");
+
+}
+
+const gotoHome = () =>
+{
+   navigate("/");
+
+}
       
 
 
@@ -172,12 +186,15 @@ const resetBtn = () =>
 
              {/* <input type="reset"  id = "btn" onClick={()=>{dispatch({type:'reset'})}}  /> */}
         </form>
-        {/* <p> {JSON.stringify(info)}</p> */}
-        
-
+        {/* <p> {JSON.stringify(info)}</p> */}   
+       
+    </div >
+    <div className="c-forgethomebtndiv">
+    <button  className="c-forgetbtn" onClick={()=>gotoforget()} >Forget Password</button>
+    <button  className="c-forgetbtn" onClick={()=>gotoHome()} >Back to home</button>
 
     </div>
-      </div>
+     </div>
     
      
      

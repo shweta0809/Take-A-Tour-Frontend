@@ -8,20 +8,19 @@ export default function ApprovePlanTour() {
     const[msg,setMsg]=useState("")
     useEffect(() => {
         fetch("http://localhost:8080/getallplantour")
-            .then(resp => resp.json())
-            .then(pkgs => setApprovepack(pkgs))
-
-
-            if(approvepack.length == 0)
-            {
-                setMsg("No Packages to Approve")
-            }
-            else
-            {
-                setMsg("")
-            }
-    },[]);// remove square brackets
-
+              .then(resp => resp.json())
+              .then(pkgs => setApprovepack(pkgs))
+             
+            
+      if(approvepack.length == 0)
+      {
+          setMsg("No approval pending")
+      }
+      else{
+          setMsg("")
+      }
+      },[]);  // load without refresh
+  
 
 console.log(approvepack)
     const navigate = useNavigate();

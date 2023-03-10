@@ -5,45 +5,40 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { BsCurrencyRupee } from "react-icons/bs";
 import Moment from "moment";
 export default function SearchingPackage() {
-  const [startdate, setStartDate] = useState();
+  const [startdate, setStartDate] = useState("");
   const [location, setLocation] = useState();
 
   const [allpackages, setAllPackages] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:8080/getAllPackagesForTourist")
       .then((resp) => resp.json())
       .then((pkgs) => setAllPackages(pkgs));
+
+    console.log("i sreaching");
   }, []);
 
   const sendData = () => {
     console.log(startdate);
     fetch("http://localhost:8080/getpackagesbydate?sdate=" + startdate)
-      //.then(resp=>console.log(resp))     +"&locations="+location
+      //.then(resp=>console.log(resp))
       .then((resp) => resp.json())
       // .then(resp=>console.log(resp))
       .then((pkgs) => setAllPackages(pkgs));
-
-    // fetch("http://localhost:8080/getpackagesbylocation?location=" + location)
-    // //.then(resp=>console.log(resp))
-    // .then((resp) => resp.json())
-    // // .then(resp=>console.log(resp))
-    // .then((loc) => setLocation(loc));
   };
-
-  const sendData1= () => {
+  const sendData1 = () => {
     console.log(startdate);
-   
+
     fetch("http://localhost:8080/getpackagesbylocation?location=" + location)
-    //.then(resp=>console.log(resp))
-    .then((resp) => resp.json())
-    // .then(resp=>console.log(resp))
-    .then((pkgs) => setAllPackages(pkgs));
+      //.then(resp=>console.log(resp))
+      .then((resp) => resp.json())
+      // .then(resp=>console.log(resp))
+      .then((pkgs) => setAllPackages(pkgs));
   };
 
   const [toggle, setToggle] = useState({});
   const [isActive, setActive] = useState(false);
-  const navigate = useNavigate();
 
   function toggleFunction(id) {
     setToggle({
@@ -52,86 +47,92 @@ export default function SearchingPackage() {
     });
   }
 
+  const gotoBookTour = (i) => {
+    console.log(allpackages[i]);
+    const onepackge = allpackages[i];
+    localStorage.setItem("packageforBookTour", JSON.stringify(allpackages[i]));
+    navigate("/booktour", { state: { onepackge } });
+  };
+
   return (
     <div>
-      
       <Container>
-      <Row>
-        <Col xs={12} md={6}>
-          <div className="Form-DateSearch">
-            <div>
-              <h4>Enter Date To Search</h4>
+        <Row>
+          <Col xs={12} md={6}>
+            <div className="Form-DateSearch">
               <div>
-                <Form>
-                  <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Control
-                      type="date"
-                      placeholder="Enter Date"
-                      name="startdate"
-                      id="startdate"
-                      onChange={(e) => {
-                        setStartDate(e.target.value);
-                      }}
-                    />
-                    {/* <Form.Text className="text-muted">
-                                    </Form.Text> */}
-                  </Form.Group>
+                <h4>Enter Date To Search</h4>
+                <div>
+                  <Form>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                      <Form.Control
+                        type="date"
+                        placeholder="Enter Date"
+                        name="startdate"
+                        id="startdate"
+                        onChange={(e) => {
+                          setStartDate(e.target.value);
+                        }}
+                      />
+                      {/* <Form.Text className="text-muted">
+                                  </Form.Text> */}
+                    </Form.Group>
 
-                  <Button
-                    id="btnsearch"
-                    type="button"
-                    onClick={(e) => {
-                      sendData(e);
-                    }}
-                  >
-                    search by date
-                  </Button>
-                </Form>
+                    <Button
+                      id="btnsearch"
+                      type="button"
+                      onClick={(e) => {
+                        sendData(e);
+                      }}
+                    >
+                      search by date
+                    </Button>
+                  </Form>
+                </div>
               </div>
             </div>
-          </div>
-        </Col>
+          </Col>
 
-        <Col xs={12} md={6}>
-          <div className="Form-DateSearch">
-            <div>
-              <h4>Enter Location To Search</h4>
+          <Col xs={12} md={6}>
+            <div className="Form-DateSearch">
               <div>
-                <Form>
-                  <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter Location"
-                      name="location"
-                      id="location"
-                      onChange={(e) => {
-                        setLocation(e.target.value);
-                      }}
-                    />
-                    {/* <Form.Text className="text-muted">
-                                    </Form.Text> */}
-                  </Form.Group>
+                <h4>Enter Location To Search</h4>
+                <div>
+                  <Form>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter Location"
+                        name="location"
+                        id="location"
+                        onChange={(e) => {
+                          setLocation(e.target.value);
+                        }}
+                      />
+                      {/* <Form.Text className="text-muted">
+                                  </Form.Text> */}
+                    </Form.Group>
 
-                  <Button
-                    id="btnsearch"
-                    type="button"
-                    onClick={(e) => {
-                      sendData1(e);
-                    }}
-                  >
-                    search by location
-                  </Button>
-                </Form>
+                    <Button
+                      id="btnsearch"
+                      type="button"
+                      onClick={(e) => {
+                        sendData1(e);
+                      }}
+                    >
+                      search by location
+                    </Button>
+                  </Form>
+                </div>
               </div>
             </div>
-          </div>
-        </Col>
-      </Row>
+          </Col>
+        </Row>
       </Container>
       <h1>{startdate}</h1>
       <h1>Book Your Trips</h1>
       <div className="c-TouristPortal-1">
-        {allpackages.map((allpk) => {
+        {allpackages.map((allpk,i) => {
           return (
             <div class="c-TouristPortal">
               <div className="c-touristpackageimages">
@@ -196,69 +197,35 @@ export default function SearchingPackage() {
                   <div className="c-1divinfo">
                     <table className="table border" border={1}>
                       <tr>
-                        <td colspan={2}>
-                          <h1>{allpk.packageidobj.packagename}</h1>
+                        <td colspan={2}><h1>{allpk.packageidobj.packagename}</h1></td>
+                      </tr>
+                      <tr>
+                        <td><h5>Start Date </h5></td>
+                        <td> <h5>{allpk.startdate}</h5></td>
+                      </tr>
+                      <tr>
+                        <td><h5>Last Date</h5> </td>
+                        <td><h5>{allpk.lastdate}</h5></td>
+                      </tr>
+                      <tr>
+                        <td> <h5>Last Date To Apply</h5> </td>
+                        <td><h5>{allpk.lastdate_apply}</h5></td>
+                      </tr>
+                      <tr>
+                        <td> <h5>Package Price</h5> </td>
+                        <td><h5><BsCurrencyRupee />{allpk.packageidobj.packageprice}</h5></td>
+                      </tr>
+                      <tr>
+                        <td><h5>Duration</h5> </td>
+                        <td><h5>{allpk.packageidobj.duration}</h5>
                         </td>
                       </tr>
                       <tr>
-                        <td>
-                          <h5>Start Date </h5>
-                        </td>
-                        <td>
-                          <h5>{allpk.startdate}</h5>
-                        </td>
+                        <td><h5>Capacity</h5></td>
+                        <td><h5>{allpk.packageidobj.tourist_capacity}</h5></td>
                       </tr>
                       <tr>
-                        <td>
-                          <h5>Last Date</h5>
-                        </td>
-                        <td>
-                          <h5>{allpk.lastdate}</h5>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <h5>Last Date To Apply</h5>
-                        </td>
-                        <td>
-                          <h5>{allpk.lastdate_apply}</h5>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          {" "}
-                          <h5>Package Price</h5>
-                        </td>
-                        <td>
-                          <h5>
-                            <BsCurrencyRupee />
-                            {allpk.packageidobj.packageprice}
-                          </h5>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          {" "}
-                          <h5>Duration</h5>
-                        </td>
-                        <td>
-                          <h5>{allpk.packageidobj.duration}</h5>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          {" "}
-                          <h5>Capacity</h5>
-                        </td>
-                        <td>
-                          <h5>{allpk.packageidobj.tourist_capacity}</h5>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          {" "}
-                          <h5>Locations</h5>{" "}
-                        </td>
+                        <td><h5>Locations</h5></td>
                         <td>
                           <h5>{allpk.packageidobj.locations}</h5>
                         </td>
@@ -273,12 +240,14 @@ export default function SearchingPackage() {
                   </div>
                 </div>
                 <div className="c-packagebtntourist">
-                   {" "}
                   <div>
-                    <button className="" id="c-dispimgbtn-tourist1">
+                    <button className="" id="c-dispimgbtn-tourist1"
+                      onClick={() => gotoBookTour(i)}
+                    >
                       Book Tour
                     </button>
                   </div>
+
                   <div>
                     <button
                       className=""
@@ -297,48 +266,3 @@ export default function SearchingPackage() {
     </div>
   );
 }
-
-
-
-
-
-{/* <div className="searchForm">
-      <div className="Form-DateSearch">
-      <form>
-        <label>Enter Date To Search &ensp;</label>
-        <input
-          type="date"
-          name="startdate"
-          id="startdate"
-          onChange={(e) => {
-            setStartDate(e.target.value);
-          }}
-        />
-        <button type="button" id="btnsearch" onClick={(e) => { sendData(e); }}> search by date
-        </button>
-        </form>
-        </div>
-        <div className="Form-LocationSearch">
-        <form>
-        <label>Enter Location To Search &ensp;</label>
-        <input
-          type="text"
-          name="location"
-          id="location"
-          placeholder="Enter Location"
-          onChange={(e) => {
-            setLocation(e.target.value);
-          }}
-        ></input>
-        <button
-          type="button"
-          id="btnsearch"
-          onClick={(e) => {
-            sendData(e);
-          }}
-        >
-          search by location
-        </button>
-      </form>
-      </div>
-      </div> */}
