@@ -22,12 +22,19 @@
     background-image: url("../Images/maldive1.jpg");
     background-size: cover;
     background-attachment: fixed;
+    /* margin-top: -90px; */
+}
+ /* .c-signupform {
+    margin-top: 100px;
+}  */
+
+.c-signupemp
+{
+    background-image: url("../Images/maldive1.jpg");
+    background-size: cover;
+    background-attachment: fixed;
     margin-top: -90px;
 }
- .c-signupform {
-    margin-top: 100px;
-} 
-
 
 
 #c-allbtn1 {
@@ -38,6 +45,9 @@
     background-color: #B53389;
     margin-top: 15px;
 }
+
+
+
 
 #c-allbtn1:hover {
     background-color: #800080;
@@ -107,6 +117,72 @@ input:hover {
 
 }
 
+
+
+
+ul li .c-navlink{
+    position: relative;
+    display: block;
+    font-weight: 600;
+    font-size:17px;
+    color: #ffffff;
+    font-family: 'Itim', cursive;
+    /* font-family: 'Sansita Swashed', cursive; */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.5s ease;    
+  }
+  /* //------------------------------------------------------------------------- */
+  ul li .c-navlink:hover
+  {
+       font-weight: 700;
+       text-shadow: 1px 1px 2px	#E8E8E8;
+  
+  }
+  
+  .c-navcolor
+  {
+    opacity : 0.6;
+     background-color: #282c34; 
+     z-index: 999;
+     position: fixed;
+    /* background-color: #dcb5ff; */
+  }
+
+  /* ------------------------------------------------------------------------------- */
+  
+  
+.searchForm
+{
+    border: 1px solid black;
+   
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.Form-DateSearch
+{
+    height:270px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: 	#F0F0F0; */
+}
+
+#btnsearch
+{
+    /* padding-left: 20px; */
+    width: auto;
+    font-family: 300;
+    font-size: medium;
+    color: #ffffff;
+    background-color: #B53389;
+    border: 1px solid #B53389;
+}
+
+  
+  
 /* ---------------------------------------------------------------------- */
 
 
@@ -141,19 +217,38 @@ input:hover {
 .c-disppackagetable 
 {
    border: 2px solid black;
+   width : 100%;
 
 }
 
-#c-dispimgbtn{
-    padding-left: 20px;
-    width: 150px;
+#c-dispimgbtn {
+    width: 130px;
     font-family: 400;
-    font-size: larger;
+    font-size: medium;
     color: #ffffff;
     background-color: #B53389;
-
+ 
 }
 
+
+#c-displanbtn {
+    width: 80px;
+    font-family: 400;
+    font-size: medium;
+    color: #ffffff;
+    background-color: #B53389;
+ 
+}
+#c-displanbtn :hover {
+   
+    box-shadow: 2px 2px 5px gray;
+    background-color: purple;
+ 
+}
+.c-navlink
+{
+    color: #ffffff;
+}
 /* .c-dispimages
 {
     align-items: center;
@@ -174,9 +269,10 @@ input:hover {
     border: 3px solid black;
     background-color:black;
     box-shadow: 10px 10px 8px gray;
+    width : 1200px;
     border-radius: 5%;
      position: fixed;
-     left : 5%;
+     left : 10%;
      top : 10%;
      
    /*align-items: center;
@@ -194,7 +290,7 @@ input:hover {
     border-radius: 5%;
     padding: 2px; 
     height: 500PX;
-    Width: 600px;
+    Width: 680px;
     
     
 } 
@@ -202,7 +298,6 @@ input:hover {
 .c-dispsingleimage img{
     border-radius: 5%;
 }
-
 
 /* ------------------------------------------ */
 .c-footerdiv
@@ -235,6 +330,11 @@ input:hover {
     /* border : 1px solid palevioletred; */
 }
 
+
+.c-footerdivhappycust
+{
+   background-image: url("../Images/footerimage.png");
+}
 /* .c-footerdescription
 {
     border : 1px solid green;
@@ -244,15 +344,18 @@ input:hover {
 
 .c-footericon 
 {
+    /* border : 1px solid palevioletred; */
+    width : 350px;
     margin-top: 20px;
     display: flex;
     justify-content: space-around;
 }
 
+
+
 .c-footerdivthird
 {
     height:270px;
-   
 
     display: flex;
     align-items: center;
@@ -270,7 +373,6 @@ input:hover {
     background-color: 	#F0F0F0;
     padding-top: 12px;
 }
-
 
 
 /*-------------------------------------------------------------------------------*/
@@ -347,12 +449,25 @@ input:hover {
 
 .c-packageallinfo
 {
-    border: 2px solid #25D366;
+    /* border: 2px solid #25D366; */
+    /* background-color:  #FDEB71 ; */
+    /* background-image: linear-gradient( 135deg, #81FBB8 10%, #28C76F 100%); */
+    /* background-image: linear-gradient( 135deg, #90F7EC 10%, #32CCBC 100%);
+     */
+   
+     background-color: #85FFBD;
+     background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
+        
+     /* background-image: linear-gradient( 135deg, #FDEB71 10%, #F8D800 100%); */
+
+     /* background-image: linear-gradient( 135deg, #FDEB71 10%, #F8D800 100%); */
     display: flex;
     flex: wrap;
-    height: 450px;
+    height: 100%;
     width: 1050px;
     box-shadow: 10px 10px 12px gray;
+    border-radius: 3%;
+
     /* background-color:#FFA836; */
     /* background-color:#00FA9A; */
     /* background-color: #25D366; */
@@ -369,13 +484,17 @@ input:hover {
     /* border: 1px solid #800080; */
     /* height: 100px; */
     border-right:2px double #25D366 ;
-    width: 550px;
+    width: 600px;
+   
 }
+
+
 
 .c-2divinfo
 {
     /* border: 1px solid yellow; */
     /* height: 100px; */
+    padding: 5px;
     width: 550px;
   
 
@@ -385,6 +504,7 @@ input:hover {
 #c-dispimgbtn-tourist1{
 
     width: 150px;
+    height: 40px;
     font-family: 300;
     font-size: medium;
     color: #ffffff;
@@ -392,6 +512,7 @@ input:hover {
     border:1px solid #B53389;
     margin-left: 130px;
     margin-right: 130px;
+    border-radius: 2%;
 }   
 
 #c-dispimgbtn-tourist1:hover{
@@ -410,12 +531,11 @@ input:hover {
 .c-mainpackageallinfo
 {
     position: fixed;
-    top: 20%;
+    top: 15%;
     left: 16%;
     z-index: 9999;
-    
+   
 }
-
 
 .c-maincontainer
 {
@@ -425,38 +545,7 @@ background-color: rgba(0,0,0, 0.4);  */
 }
 
 
-
-/*-----------------------------------------------------------*/ 
-
-.searchForm
-{
-    border: 1px solid black;
-   
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-}
-.Form-DateSearch
-{
-    height:270px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* background-color: 	#F0F0F0; */
-}
-
-#btnsearch
-{
-    /* padding-left: 20px; */
-    width: auto;
-    font-family: 300;
-    font-size: medium;
-    color: #ffffff;
-    background-color: #B53389;
-    border: 1px solid #B53389;
-}
-/*-------------------------------------------*/
-
+/* --------------------------------------------------------------------------------------- */
 .c-forgetpwddiv
 { 
     width: 80%;
@@ -544,7 +633,7 @@ font-size: larger;
 
 .c-booktourinnerdiv
 {
-   height:500px;
+   height:540px;
     border: 2px solid black;
     
 
@@ -571,6 +660,8 @@ font-size: larger;
 }
 
 #c-bookbutton {
+    margin-top: 5px;
+    margin-bottom: 5px;
      width: 80px; 
     font-family: 400;
     font-size: medium;
@@ -590,17 +681,45 @@ table .c-bookbuttondiv
     margin-top: 20px;
 }
 
+#c-getinvoicebutton
+{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 120px; 
+    font-family: 400;
+    font-size: medium;
+    color: #ffffff;
+    background-color: #B53389;
+ 
+}
 
+#c-getinvoicebutton:hover {
+   
+    box-shadow: 2px 2px 5px gray;
+    background-color: purple;
+ 
+}
 
 /*---------------------------------------------------------------------*/
+.ProfilemainDiv
+{
+    /* border: 1px solid black; */
+    top:40%;
+    height: 500px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ 
+.ProfileTable tr td , .ProfileTable tr th 
+{
+    padding: 15px;
+    /* border: 1px solid gold; */
+}
 
-.gradient-custom {
-    /* fallback for old browsers */
-    background: #f6d365;
-    
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
-    
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
-    }
+.ProfileTable
+{
+    border: 2px double black;
+    box-shadow: 5px 5px 5px gray;
+}

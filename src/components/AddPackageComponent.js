@@ -4,15 +4,17 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { useReducer, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import "../CSS/Style.css"
+
 export default function AddPackageComponent() {
 
   const init = {
     "packagename": "",
-    "packageprice": 0,
-    "duration": "",
     "tourist_capacity": 0,
     "description": "",
-    "locations": ""
+    "locations": "",
+    "boardinglocation":""
   }
   const reducer = (state, action) => {
     switch (action.type) {
@@ -27,7 +29,7 @@ export default function AddPackageComponent() {
 
   const navigate = useNavigate();
   const [file, setFile] = useState();
-  const[pacid,setPackageid] = useState(0);
+  const [pacid, setPackageid] = useState(0);
 
   //    const sendData = (e)=>
   //    {
@@ -77,6 +79,7 @@ export default function AddPackageComponent() {
   //  .catch((error) =>  alert("server error try after some time"));
   // }  
 
+
   const sendDatapack = (e) => {
     e.preventDefault();
     const reqOptions = {
@@ -96,120 +99,119 @@ export default function AddPackageComponent() {
       })
       .then(text => text.length ? JSON.parse(text) : {})
       .then(obj => {
-        if (obj) 
-        {
+        if (obj) {
           setPackageid(obj.package_id);
-        
+
           alert("successfully added package");
         }
-        else 
-        {
+        else {
           alert(" failure, try again");
         }
       })
       .catch((error) => alert("server error try after some time"));
+  }
+
+  const sendDataimg = (e) => {
+    e.preventDefault();
+    const fd = new FormData();
+    fd.append("file", file);
+    const reqOptions1 =
+    {
+      method: 'POST',
+      //headers: { 'Content-Type': 'multipart/form-data' },
+      body: fd
     }
+    // to check image is uploaded or not , package_id sending as path variable
+    fetch("http://localhost:8080/uploadimageandpid/" + pacid, reqOptions1)
+      // .then(resp=>console.log(resp))
+      .then(resp => resp.json())
+      .then(obj => {
+        if (obj) {
+          alert("successfully added packageimage");
+         
+        }
+        else {
+          alert("image uploading failure, try again");
+         
+        }
+      })
 
-    const sendDataimg = (e) => {
-      e.preventDefault();
-      const fd = new FormData();
-      fd.append("file", file);
-      const reqOptions1 =
-      {
-        method: 'POST',
-        //headers: { 'Content-Type': 'multipart/form-data' },
-        body: fd
-      }
-      // to check image is uploaded or not , package_id sending as path variable
-      fetch("http://localhost:8080/uploadimageandpid/" +pacid, reqOptions1)
-        // .then(resp=>console.log(resp))
-        .then(resp => resp.json())
-        .then(obj => {
-          if (obj) {
-            alert("successfully added packageimage");
-            navigate("/employee_home");
-          }
-          else {
-            alert("image uploading failure, try again");
-            navigate("/employee_home");
-          }
-        })
+  }
 
-    }
 
-  
-    return (
-      <div >
-        <div>
-          <h4>Add Package Form</h4>
-        </div>
-        <div class="d-flex justify-content-around">
-          <Form>
-  
-            <Form.Group>
-  
-              <Form.Control className="mb-3" size="lg" type="text"
-                placeholder="packagename" name="packagename" id="packagename"
-                onChange={(e) => { dispatch({ type: 'update', fld: "packagename", val: e.target.value }) }} required />
-            </Form.Group>
-            <Form.Group>
-  
-              <Form.Control className="mb-3" size="lg" type="number"
-                placeholder="packageprice" name="packageprice" id="packageprice"
-                onChange={(e) => { dispatch({ type: 'update', fld: "packageprice", val: e.target.value }) }} required />
-            </Form.Group>
-            <Form.Group>
-  
-              <Form.Control className="mb-3" size="lg" type="text" placeholder="duration" name="duration" id="duration"
-                onChange={(e) => { dispatch({ type: 'update', fld: "duration", val: e.target.value }) }} required />
-            </Form.Group>
-            <Form.Group>
-  
-              <Form.Control className="mb-3" size="lg" type="number" placeholder="tourist_capacity" name="tourist_capacity" id="tourist_capacity"
-                onChange={(e) => { dispatch({ type: 'update', fld: "tourist_capacity", val: e.target.value }) }} required />
-            </Form.Group>
-            <Form.Group>
-  
-              <Form.Control className="mb-3" size="lg" type="text" placeholder="description" name="description" id="description"
-                onChange={(e) => { dispatch({ type: 'update', fld: "description", val: e.target.value }) }} required />
-            </Form.Group>
-            <Form.Group>
-  
-              <Form.Control className="mb-3" size="lg" type="text" placeholder="locations" name="locations" id="locations"
-                onChange={(e) => { dispatch({ type: 'update', fld: "locations", val: e.target.value }) }} required />
-            </Form.Group>
-  
-  
-  
-  
-  
-            <Button variant="primary" type="submit" onClick={(e) => { sendDatapack(e) }} >
-              Click here to Add Package
-            </Button>
-          </Form>
-  
-          <Form>
-            <Form.Group>
-  
-              <Form.Control className="mb-3" size="lg" type="file" placeholder="packageimages" name="packageimages" id="packageimages"
-                onChange={(e) => { setFile(e.target.files[0]) }}
-                multiple required />
-            </Form.Group>
-  
-  
-            <Button variant="primary" type="submit" onClick={(e) => { sendDataimg(e) }} >
-              Click here to Add Package
-            </Button>
-  
-          </Form>
-        </div>
-  
-        {/* <button id="c-dispimgbtn">
-          <Link to="/employee_home" id="c-dispimgbtn">Close</Link>
-        </button> */}
-  
+  return (
+    <div >
+      <div>
+        <h3><b>Add new Package</b></h3>
+      </div><br></br>
+      <div class="d-flex justify-content-around">
+        <Form>
+
+          <Form.Group>
+
+            <Form.Control className="mb-3" size="lg" type="text"
+              placeholder="packagename" name="packagename" id="packagename"
+              onChange={(e) => { dispatch({ type: 'update', fld: "packagename", val: e.target.value }) }} required />
+          </Form.Group>
+        
+          <Form.Group>
+
+          
+
+            <Form.Control className="mb-3" size="lg" type="number" placeholder="tourist_capacity" name="tourist_capacity" id="tourist_capacity"
+              onChange={(e) => { dispatch({ type: 'update', fld: "tourist_capacity", val: e.target.value }) }} required />
+          </Form.Group>
+          <Form.Group>
+
+            <Form.Control className="mb-3" size="lg" type="text" placeholder="description" name="description" id="description"
+              onChange={(e) => { dispatch({ type: 'update', fld: "description", val: e.target.value }) }} required />
+          </Form.Group>
+
+          <Form.Group>
+
+            <Form.Control className="mb-3" size="lg" type="text" placeholder="locations" name="locations" id="locations"
+              onChange={(e) => { dispatch({ type: 'update', fld: "locations", val: e.target.value.toLocaleLowerCase() }) }} required />
+          </Form.Group>
+
+          <Form.Group>
+
+          <Form.Control className="mb-3" size="lg" type="text" placeholder="boardinglocation" name="boardinglocation" id="locboardinglocationations"
+              onChange={(e) => { dispatch({ type: 'update', fld: "boardinglocation", val: e.target.value.toLocaleLowerCase() }) }} required />
+          </Form.Group>
+
+
+
+
+
+          <Button variant="primary" type="submit" onClick={(e) => { sendDatapack(e) }} >
+            Click here to Add Package
+          </Button>
+        </Form>
+
+        <Form>
+          <Form.Group>
+
+            <Form.Control className="mb-3" size="lg" type="file" placeholder="packageimages" name="packageimages" id="packageimages"
+              onChange={(e) => { setFile(e.target.files[0]) }}
+              multiple required />
+          </Form.Group>
+
+
+          <Button variant="primary" type="submit" onClick={(e) => { sendDataimg(e) }} >
+            Click here to Add Package
+          </Button>
+
+        </Form>
       </div>
-    );
+
+      {/* <button id="c-dispimgbtn">
+        <Link to="/employee_home" id="c-dispimgbtn">Close</Link>
+      </button> */}
+
+    </div>
+  );
+
+
 
 
 }

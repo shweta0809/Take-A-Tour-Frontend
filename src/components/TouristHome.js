@@ -1,7 +1,6 @@
 // import { useEffect, useState } from 'react';
 // import { Link, Route, Routes } from 'react-router-dom';
 // import { Outlet } from 'react-router-dom';
-// import TouristPortal from './TouristPortal';
 
 // export default function TouristHome() {
 
@@ -54,12 +53,7 @@
 //                             <li className="nav-item ">
 //                                 <Link to="home" className="c-navlink px-3">Home</Link>
 //                             </li>
-//                             <li className="nav-item ">
-//                                 <Link to="profile" className="c-navlink px-3">welcome {tourist && tourist.t_fname}</Link>
-//                             </li>
-//                             <li className="nav-item ">
-//                                 <Link to="logout" className="c-navlink px-3">Logout</Link>
-//                             </li>
+                   
                             
 
 //                         </ul>
@@ -74,7 +68,7 @@
 //             {/* <h1>Welcome {tourist && tourist.t_fname} {tourist && tourist.t_lname}</h1>  */}
 //             <Outlet/>
 
-//     <TouristPortal/>
+
 
 
 //         </div>

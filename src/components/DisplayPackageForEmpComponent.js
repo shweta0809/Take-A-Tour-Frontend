@@ -17,7 +17,7 @@ export default function DisplayPackageForEmp() {
             .then(resp => resp.json())
             .then(pkgs => setAllPackages(pkgs))
 
-    },[] );// remove square brackets
+    },[]);  // chnage this to load without refresh
 
 
     //const [isActive, setActive] = useState("false");
@@ -68,7 +68,7 @@ export default function DisplayPackageForEmp() {
             }
           })
           .then(text => text.length ? JSON.parse(text):{})
-        .then(obj =>  {
+        .then(obj =>  {
                 console.log(obj);
                 
                 if(obj==null)
@@ -87,16 +87,17 @@ export default function DisplayPackageForEmp() {
             <Container fluid>
                 <Row>
                     <Col>
-                        <h1>packages are here</h1>
+                        <h1>Available Packages for Tour Plan</h1>
+                        <br></br>
                         <table className="c-disppackagetable">
                             <tr>
                                 <th>Package ID</th>
                                 <th>Package Name</th>
-                                <th>Package Price</th>
-                                <th>Duration</th>
+                                
                                 <th>Tourist Capacity</th>
                                 <th>Description</th>
-                                <th>Location</th>
+                                <th>Boarding location</th>
+                                <th>Destination</th>
                                 <th>Images</th>
                                 <th>Planned Tour</th>
                                 <th>Delete Package</th>
@@ -107,12 +108,11 @@ export default function DisplayPackageForEmp() {
                                 allpackages.map(allpk => {
                                     return <tr>
                                         <td>{allpk.package_id}</td>
-                                        <td>{allpk.packagename}</td>
-                                        <td>{allpk.packageprice}</td>
-                                        <td>{allpk.duration}</td>
+                                        <td><b>{allpk.packagename}</b></td>
+                                
                                         <td>{allpk.tourist_capacity}</td>
-
                                         <td>{allpk.description}</td>
+                                        <td>{allpk.boardinglocation}</td>
                                         <td>{allpk.locations}</td>
                                       
                                     
@@ -126,7 +126,7 @@ export default function DisplayPackageForEmp() {
                                                          slidesPerView={"auto"}
                                                         coverflowEffect={{
                                                             rotate: 50,
-                                                            stretch: 25,
+                                                            stretch: 0,
                                                             depth: 100,
                                                              modifier: 1,
                                                              slideShadows: false,
@@ -179,6 +179,9 @@ export default function DisplayPackageForEmp() {
 
     )
 }
+
+
+
 
 
 

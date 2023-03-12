@@ -56,7 +56,6 @@ export default function HomeComponent(props)
             <CarouselFadeExample/>
              <SearchingPackage/>
              <FooterComponent/> 
-           
         </div>
         <Outlet></Outlet>
 

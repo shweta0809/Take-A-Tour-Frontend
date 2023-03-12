@@ -3,6 +3,7 @@ import '../CSS/Style.css';
 import { Container, Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import NavbarComponent from './NavbarComponent';
 
 export default function SignUpTouristComponent() {
     const init =
@@ -19,6 +20,7 @@ export default function SignUpTouristComponent() {
         postalcode: { value: "", hasError: true, touched: false, error: "" },
         state: { value: "", hasError: true, touched: false, error: "" },
         country: { value: "", hasError: true, touched: false, error: "" },
+        bdate: { value: "", hasError: true, touched: false, error: "" },
         isFormValid: false
     }
 
@@ -121,6 +123,19 @@ export default function SignUpTouristComponent() {
                     error = "Enter valid Country name"
                 }
                 break;
+                case "bdate":
+                    var todaysdate=new Date();
+                    var bdate=new Date(info.bdate.value)
+                   var year1=todaysdate.getFullYear();
+                   var birthyear=bdate.getFullYear();
+                    var age=(year1-birthyear);
+                    console.log(age )
+                   if (age<18) 
+                   {
+                       hasError = true;
+                       error = "Age Should be greater than 18"
+                   }
+                   break; 
 
 
 
@@ -223,7 +238,8 @@ export default function SignUpTouristComponent() {
                 city: info.city.value,
                 postalcode: info.postalcode.value,
                 state: info.state.value,
-                country: info.country.value
+                country: info.country.value,
+                bdate :info.bdate.value
             })
 
         }
@@ -240,8 +256,8 @@ export default function SignUpTouristComponent() {
             {
            
               throw  new Error("server error")  
-            }
-          })
+            }
+          })
     }
 
     const gotoHome = () =>
@@ -254,9 +270,10 @@ export default function SignUpTouristComponent() {
 
     return (
         <div className="c-signup">
-            
-                <Container fluid>
+              <NavbarComponent ></NavbarComponent>
 
+                <Container fluid>
+              
                     <Row>
                         <Col md={{ span: 4, offset: 5 }} xs={{ span: 10, offset: 1 }}>
                             <div className='c-signupform'>
@@ -325,6 +342,22 @@ export default function SignUpTouristComponent() {
                                             <tr>
                                                 <td colSpan={2}>
                                                     <p style={{ display: info.lname.touched && info.lname.hasError ? "block" : "none", color: "red" }}> {info.lname.error} </p>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+
+                                                <td colSpan={2}>
+                                                    <input type="text" placeholder="Birth date" name="bdate" id="bdate" value={info.bdate.value}
+                                                        onFocus={(e) => (e.target.type = "date")}
+                                                        onChange={(e) => { onInputChange("bdate", e.target.value, dispatch) }}
+                                                        onBlur={(e) => { onFocusOut("bdate", e.target.value, dispatch, e.target.type = "text") }}
+                                                        className="form-control form-control-sm" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan={2}>
+                                                    <p style={{ display: info.bdate.touched && info.bdate.hasError ? "block" : "none", color: "red" }}> {info.bdate.error} </p>
                                                 </td>
                                             </tr>
                                             <tr>

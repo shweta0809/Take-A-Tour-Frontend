@@ -55,3 +55,5 @@ const slide_img = [
     </div>
   );
 }
+
+

@@ -1,23 +1,30 @@
-import { useEffect, useState } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useEffect, useReducer, useState } from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { BsCurrencyRupee } from "react-icons/bs";
-import Moment from "moment";
-export default function SearchingPackage() {
-  const [startdate, setStartDate] = useState("");
-  const [location, setLocation] = useState();
+import { Button, Form} from "react-bootstrap";
 
+
+export default function SearchingPackage() 
+{
+  const [startdate, setStartDate] = useState("");
   const [allpackages, setAllPackages] = useState([]);
+  // const [location, setLocation] = useState();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetch("http://localhost:8080/getAllPackagesForTourist")
-      .then((resp) => resp.json())
+    useEffect(() => {
+      fetch("http://localhost:8080/getAllPackagesForTourist")
+       .then((resp) => resp.json())
       .then((pkgs) => setAllPackages(pkgs));
 
-    console.log("i sreaching");
-  }, []);
+       console.log("i sreaching")
+ 
+
+    }, []);
+
+
+
 
   const sendData = () => {
     console.log(startdate);
@@ -26,110 +33,172 @@ export default function SearchingPackage() {
       .then((resp) => resp.json())
       // .then(resp=>console.log(resp))
       .then((pkgs) => setAllPackages(pkgs));
-  };
-  const sendData1 = () => {
-    console.log(startdate);
 
-    fetch("http://localhost:8080/getpackagesbylocation?location=" + location)
-      //.then(resp=>console.log(resp))
-      .then((resp) => resp.json())
-      // .then(resp=>console.log(resp))
-      .then((pkgs) => setAllPackages(pkgs));
+     
   };
 
   const [toggle, setToggle] = useState({});
   const [isActive, setActive] = useState(false);
 
+
   function toggleFunction(id) {
     setToggle({
-      ...toggle,
-      [id]: !toggle[id],
+        ...toggle,
+        [id]: !toggle[id],
     });
-  }
+    
+    }
 
-  const gotoBookTour = (i) => {
-    console.log(allpackages[i]);
-    const onepackge = allpackages[i];
-    localStorage.setItem("packageforBookTour", JSON.stringify(allpackages[i]));
-    navigate("/booktour", { state: { onepackge } });
-  };
+// -------------------------------------------------------------------------------
+//search by location
+    
+    const init={
+      "boardinglocation":"",
+      "location":""
+    }
+
+
+    const reducer = (state,action) => {
+      switch(action.type)
+      {
+          case 'update':
+               return {...state ,[action.fld]:action.val}
+          case 'reset':
+               return init;
+      }
+  
+     }
+     const [info,dispatch] =useReducer(reducer,init);
+
+     console.log( info.location);
+     console.log( info.boardinglocation);
+    const sendData1= (e) => {
+
+      
+      console.log(startdate);
+     
+      fetch("http://localhost:8080/getpackagesbylocation?location=" + info.location+"&boardinglocation="+info.boardinglocation)
+      //.then(resp=>console.log(resp))
+      .then((resp) => resp.json())
+      // .then(resp=>console.log(resp))
+      .then((pkgs) => setAllPackages(pkgs));
+    };
+  
+   
+
+    const gotoBookTour=(i)=> {
+
+
+      const tinfo =(localStorage.getItem("loggedtourist"));
+      if(tinfo == null)
+      {
+           alert("Please Login to Book Tour");
+           
+      }
+      else
+      {      
+          console.log(allpackages[i]);
+          const onepackge=allpackages[i];
+          localStorage.setItem("packageforBookTour",JSON.stringify(allpackages[i]));
+          navigate("/booktour",{state :{onepackge}});
+      }
+    
+
+}
+
+
+
 
   return (
-    <div>
-      <Container>
-        <Row>
-          <Col xs={12} md={6}>
-            <div className="Form-DateSearch">
+    <div >
+       <Container>
+      <Row>
+        <Col xs={12} md={6}>
+          <div className="Form-DateSearch">
+            <div>
+              <h4>Enter Date To Search</h4>
               <div>
-                <h4>Enter Date To Search</h4>
-                <div>
-                  <Form>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                      <Form.Control
-                        type="date"
-                        placeholder="Enter Date"
-                        name="startdate"
-                        id="startdate"
-                        onChange={(e) => {
-                          setStartDate(e.target.value);
-                        }}
-                      />
-                      {/* <Form.Text className="text-muted">
-                                  </Form.Text> */}
-                    </Form.Group>
-
-                    <Button
-                      id="btnsearch"
-                      type="button"
-                      onClick={(e) => {
-                        sendData(e);
+                <Form>
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Control
+                      type="date"
+                      placeholder="Enter Date"
+                      name="startdate"
+                      id="startdate"
+                      onChange={(e) => {
+                        setStartDate(e.target.value);
                       }}
-                    >
-                      search by date
-                    </Button>
-                  </Form>
-                </div>
+                    />
+                    {/* <Form.Text className="text-muted">
+                                    </Form.Text> */}
+                  </Form.Group>
+
+                  <Button
+                    id="btnsearch"
+                    type="button"
+                    onClick={(e) => {
+                      sendData(e);
+                    }}
+                  >
+                    search by date
+                  </Button>
+                </Form>
               </div>
             </div>
-          </Col>
+          </div>
+        </Col>
 
-          <Col xs={12} md={6}>
-            <div className="Form-DateSearch">
+        <Col xs={12} md={6}>
+          <div className="Form-DateSearch">
+            <div>
+              <h4>Enter Location To Search</h4>
               <div>
-                <h4>Enter Location To Search</h4>
-                <div>
-                  <Form>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                      <Form.Control
-                        type="text"
-                        placeholder="Enter Location"
-                        name="location"
-                        id="location"
-                        onChange={(e) => {
-                          setLocation(e.target.value);
-                        }}
-                      />
-                      {/* <Form.Text className="text-muted">
-                                  </Form.Text> */}
-                    </Form.Group>
+                <Form>
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Control
+                      type="text"
+                      placeholder="Boarding location"
+                      name="boardinglocation"
+                      id="boardinglocation"
+                        onChange={(e)=>{dispatch({type:'update',fld:"boardinglocation", val: e.target.value})}}
+                    />
+                    {/* <Form.Text className="text-muted">
+                                    </Form.Text> */}
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Control
+                      type="text"
+                      placeholder="Destination"
+                      name="location"
+                      id="location"
+                      onChange={(e)=>{dispatch({type:'update',fld:"location", val: e.target.value})}}
+                      
+                    />
+                    {/* <Form.Text className="text-muted">
+                                    </Form.Text> */}
+                  </Form.Group>
 
-                    <Button
-                      id="btnsearch"
-                      type="button"
-                      onClick={(e) => {
-                        sendData1(e);
-                      }}
-                    >
-                      search by location
-                    </Button>
-                  </Form>
-                </div>
+                  <Button
+                    id="btnsearch"
+                    type="button"
+                    onClick={(e) => {
+                      sendData1(e);
+                    }}
+                  >
+                    search by location
+                  </Button>
+                </Form>
               </div>
             </div>
-          </Col>
-        </Row>
+          </div>
+        </Col>
+      </Row>
       </Container>
-      <h1>{startdate}</h1>
+
+      {/* <h1>{info.location.value}</h1> */}
+
+
+
       <h1>Book Your Trips</h1>
       <div className="c-TouristPortal-1">
         {allpackages.map((allpk,i) => {
@@ -170,7 +239,7 @@ export default function SearchingPackage() {
 
                 <h6>
                   <BsCurrencyRupee />
-                  {allpk.packageidobj.packageprice}
+                  {allpk.packageprice}
                 </h6>
                 {/* <h6>{allpk.packageidobj.description}</h6> */}
                 <h6>
@@ -181,79 +250,114 @@ export default function SearchingPackage() {
                   <span>{allpk.lastdate_apply}</span>
                 </h6>
 
-                <button
-                  id="c-dispimgbtn-tourist"
-                  onClick={() => toggleFunction(allpk.tour_id)}
-                >
-                  Show More
-                </button>
+                <button id="c-dispimgbtn-tourist" onClick={() => toggleFunction(allpk.tour_id)}>Show More</button>
               </div>
 
-              <div
-                className="c-mainpackageallinfo"
-                style={{ display: toggle[allpk.tour_id] ? "block" : "none" }}
-              >
+              <div className="c-mainpackageallinfo" style={{ display: toggle[allpk.tour_id] ? "block" : "none" }}>
                 <div className="c-packageallinfo">
                   <div className="c-1divinfo">
-                    <table className="table border" border={1}>
+                    <table
+                      className="table border"
+                      // border={1}
+                    >
                       <tr>
-                        <td colspan={2}><h1>{allpk.packageidobj.packagename}</h1></td>
-                      </tr>
-                      <tr>
-                        <td><h5>Start Date </h5></td>
-                        <td> <h5>{allpk.startdate}</h5></td>
-                      </tr>
-                      <tr>
-                        <td><h5>Last Date</h5> </td>
-                        <td><h5>{allpk.lastdate}</h5></td>
-                      </tr>
-                      <tr>
-                        <td> <h5>Last Date To Apply</h5> </td>
-                        <td><h5>{allpk.lastdate_apply}</h5></td>
-                      </tr>
-                      <tr>
-                        <td> <h5>Package Price</h5> </td>
-                        <td><h5><BsCurrencyRupee />{allpk.packageidobj.packageprice}</h5></td>
-                      </tr>
-                      <tr>
-                        <td><h5>Duration</h5> </td>
-                        <td><h5>{allpk.packageidobj.duration}</h5>
+                        <td colspan={2}>
+                          <h1>{allpk.packageidobj.packagename}</h1>
                         </td>
                       </tr>
                       <tr>
-                        <td><h5>Capacity</h5></td>
-                        <td><h5>{allpk.packageidobj.tourist_capacity}</h5></td>
-                      </tr>
-                      <tr>
-                        <td><h5>Locations</h5></td>
                         <td>
-                          <h5>{allpk.packageidobj.locations}</h5>
+                          <h5>Start Date </h5>
+                        </td>
+                        <td>
+                          <h5>{allpk.startdate}</h5>
                         </td>
                       </tr>
+                      <tr>
+                        <td>
+                          <h5>Last Date</h5>
+                        </td>
+                        <td>
+                          <h5>{allpk.lastdate}</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h5>Last Date To Apply</h5>
+                        </td>
+                        <td>
+                          <h5>{allpk.lastdate_apply}</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                         
+                          <h5>Package Price</h5>
+                        </td>
+                        <td>
+                          <h5>
+                            <BsCurrencyRupee />
+                            {allpk.packageprice}
+                          </h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                        
+                          <h5>Duration</h5>
+                        </td>
+                        <td>
+                          <h5>{allpk.duration}</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          
+                          <h5>Capacity</h5>
+                        </td>
+                        <td>
+                          <h5>{allpk.packageidobj.tourist_capacity}</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          
+                          <h5>Available Seats</h5>
+                        </td>
+                        <td>
+                          <h5>{allpk.availseats}</h5>
+                        </td>
+                      </tr>
+                      
                     </table>
                   </div>
                   <div className="c-2divinfo">
                     <h3>description</h3>
-                    <div>
-                      <h5>{allpk.packageidobj.description}</h5>
+                    <div><h5>{allpk.packageidobj.description}</h5>
+
                     </div>
+                    <br></br>
+                    <h3>Locations</h3>
+                       
+                       <h5>{allpk.packageidobj.locations}</h5>
+                     
                   </div>
+
+
+                 
+                         
+                         
                 </div>
                 <div className="c-packagebtntourist">
+                 
                   <div>
-                    <button className="" id="c-dispimgbtn-tourist1"
-                      onClick={() => gotoBookTour(i)}
-                    >
-                      Book Tour
+                    <button className="" id="c-dispimgbtn-tourist1" onClick={()=> gotoBookTour(i)}>
+                      Book Tour 
                     </button>
                   </div>
 
                   <div>
-                    <button
-                      className=""
-                      id="c-dispimgbtn-tourist1"
-                      onClick={() => toggleFunction(allpk.tour_id)}
-                    >
+                    <button className="" id="c-dispimgbtn-tourist1" onClick={() => toggleFunction(allpk.tour_id)}>
                       Close
                     </button>
                   </div>

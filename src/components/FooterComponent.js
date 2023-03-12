@@ -3,8 +3,10 @@ import "../CSS/HomeStyle.css"
 import { Button, Container } from "react-bootstrap"
 import { Col, Row } from "react-bootstrap"
 import Form from 'react-bootstrap/Form';
-import {BsFacebook,BsInstagram,BsLinkedin,BsTwitter} from "react-icons/bs";
+import {BsFacebook,BsInstagram,BsLinkedin,BsTwitter,BsFillTelephoneFill} from "react-icons/bs";
 import {BiCopyright} from "react-icons/bi"
+import {SiGmail} from "react-icons/si"
+import happy from "../Images/footerimage.png"
 import { icons } from "react-icons";
 
 export default function FooterComponent() {
@@ -16,7 +18,6 @@ export default function FooterComponent() {
                         <div className="c-footerdiv">
                             <div >
                                 <h1>Take A Tour</h1>
-
                                 <p>
                                     This website will help to arrange a trip with appropriate packages
                                     so that tourists can plan a trip easily with the tour guide.
@@ -28,14 +29,8 @@ export default function FooterComponent() {
                     </Col>
                     <Col xs={6} md={4}>
                         <div className="c-footerdiv">
-                            <div >
-                                <h4>ooooooooo</h4>
-
-                                <h6>hhhhhhhhhhh</h6>
-                                <h6>hhhhhhhhhhh</h6>
-                                <h6>hhhhhhhhhhh</h6>
-                                <h6>hhhhhhhhhhh</h6>
-
+                            <div className="c-footerdivhappycust" >
+                              
                             </div>
                         </div>
 
@@ -46,33 +41,19 @@ export default function FooterComponent() {
                         
                         <div className="c-footerdivthird">
                             <div>
-                            <h4>Contact us</h4>
-                            <div>
-                            <Form>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                 
-                                    <Form.Control type="text" placeholder="Enter Name" />
-                                    <Form.Text className="text-muted">
-                                    </Form.Text>
-                                </Form.Group>
-
-                                <Form.Group className="mb-3" controlId="formBasicPassword">
-                                    {/* <Form.Label>Password</Form.Label> */}
-                                    <Form.Control type="number" placeholder="Contact Number" />
-                                </Form.Group>
-                                {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                                    <Form.Check type="checkbox" label="Check me out" />
-                                </Form.Group> */}
-                                <Button id="c-dispimgbtn" type="submit">
-                                    Submit
-                                </Button>
-                            </Form>
+                            <h4><b>Contact us</b></h4>
+                            <br></br>
+                            <br></br>
+                            <h5><span><BsFillTelephoneFill/></span>&ensp;&ensp;&ensp;9999999999</h5>
+                            <h5><span><SiGmail/></span>&ensp;&ensp;&ensp;takeatour28@gmail.com</h5>
+                            <br></br>
                             <div className="c-footericon">
-                               <span> < BsFacebook size="25px"/></span> 
-                               <span>  <BsInstagram size="25px"/></span> 
-                               <span>  <BsLinkedin size="25px"/></span> 
-                               <span> <BsTwitter size="25px"/></span> 
-                            </div>
+                            < BsFacebook size="25px"/> 
+                              <BsInstagram size="25px"/> 
+                              <BsLinkedin size="25px"/> 
+                             <BsTwitter size="25px"/>  
+                              
+                            
                            
                             </div>
                             </div>
@@ -96,3 +77,36 @@ export default function FooterComponent() {
         </div>
     )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// <Form>
+// <Form.Group className="mb-3" controlId="formBasicEmail">
+ 
+//     <Form.Control type="text" placeholder="Enter Name" />
+//     <Form.Text className="text-muted">
+//     </Form.Text>
+// </Form.Group>
+
+// <Form.Group className="mb-3" controlId="formBasicPassword">
+//     <Form.Label>Password</Form.Label>
+//     <Form.Control type="number" placeholder="Contact Number" />
+// </Form.Group>
+// <Form.Group className="mb-3" controlId="formBasicCheckbox">
+//     <Form.Check type="checkbox" label="Check me out" />
+// </Form.Group>
+// <Button id="c-dispimgbtn" type="submit">
+//     Submit
+// </Button>
+// </Form>

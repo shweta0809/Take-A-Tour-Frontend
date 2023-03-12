@@ -2,9 +2,9 @@ import { Row,Col, Container } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../CSS/HomeStyle.css";
+import ApprovePlanTour from "./ApprovalPlanTourComponent";
 import { useSelector } from 'react-redux';
 import NavbarComponent from "./NavbarComponent";
-import ApprovePlanTour from "./ApprovePlanTourComponent";
 
 export default function AdminHome() {
 
@@ -33,6 +33,10 @@ export default function AdminHome() {
                         <li className="nav-item ">
                             <Link to="addaccemp" className="c-navlink px-3">Add Employee</Link>
                         </li>
+                     
+                        <li className="nav-item ">
+                            <Link to="approval" className="c-navlink px-3">Approval Request</Link>
+                        </li>
                         <li className="nav-item ">
                             <Link to="logout" className="c-navlink px-3">Logout</Link>
                         </li>
@@ -42,15 +46,16 @@ export default function AdminHome() {
                 </div>
 
             </nav>
-            {/* <Col md={{span: 4 , offset : 4}} >
+            <Col md={{span: 4 , offset : 4}} >
             <h2 >
-                Admin Home
+               
             </h2>
-            </Col> */}
+            </Col>
             </Row>
             </Container>
+            {/* < ApprovePlanTour/> */}
             <Outlet />  
-            < ApprovePlanTour/>
+          
 
         </div>
 

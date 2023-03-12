@@ -47,30 +47,9 @@ export default function AddEmployee() {
                     error = "Adhar no Should be of 12 digits Only"
                 }
                 break;
-            case "e_bdate":
-                     var todaysdate=new Date();
-                     var bdate=new Date(info.e_bdate.value)
-                    var year1=todaysdate.getFullYear();
-                    var birthyear=bdate.getFullYear();
-                     var age=(year1-birthyear);
-                     console.log(age )
-                    if (age<18) 
-                    {
-                        hasError = true;
-                        error = "Age Should be greater than 18"
-                    }
-                    break;
-            case "e_hiredate":
-                var todaysdate1=new Date();
-                var hiredate=new Date(info.e_hiredate.value)
-               if (hiredate>todaysdate) 
-               {
-                   hasError = true;
-                   error = "Hiredate Should be valid"
-               }
-               break;
+
             case "e_designation":
-                let regex13 = /^[A-Za-z]{1,15}$/;
+                let regex13 = /^[A-Za-z\s]{1,15}$/;
                 if (!regex13.test(value)) {
                     hasError = true;
                     error = "Designation Should be between 6 - 15 characters"
@@ -104,7 +83,7 @@ export default function AddEmployee() {
 
                 if (!regex12.test(value)) {
                     hasError = true;
-                    error = "First Name Should be valid and not more than 15 characters"
+                    error = "Middle Name Should be valid and not more than 15 characters"
                 }
                 break;
             case "e_lname":
@@ -179,6 +158,28 @@ export default function AddEmployee() {
                     error = "Enter valid Country name"
                 }
                 break;
+                case "e_bdate":
+                     var todaysdate=new Date();
+                     var bdate=new Date(info.e_bdate.value)
+                    var year1=todaysdate.getFullYear();
+                    var birthyear=bdate.getFullYear();
+                     var age=(year1-birthyear);
+                     console.log(age )
+                    if (age<18) 
+                    {
+                        hasError = true;
+                        error = "Age Should be greater than 18"
+                    }
+                    break;
+             case "e_hiredate":
+                var todaysdate1=new Date();
+                var hiredate=new Date(info.e_hiredate.value)
+               if (hiredate>todaysdate1) 
+               {
+                   hasError = true;
+                   error = "Hiredate Should be valid"
+               }
+               break;
 
 
 
@@ -317,13 +318,14 @@ export default function AddEmployee() {
                 }
                
                 // to check image is uploaded or not , employee_id sending as path variable
-                fetch("http://localhost:8080/uploadimage/"+obj.employee_id, reqOptions1)
+                fetch("http://localhost:8080/uploadimageemp/"+obj.employee_id, reqOptions1)
                     // .then(resp=>console.log(resp))
                     .then(resp => resp.json())
                     .then(obj => {
                         if (obj) {
                             alert("Reg successful.");
                             navigate("/admin_home");
+                           
                         }
                         else {
                             alert("Reg successful. but image uploading failure, try again");
@@ -341,7 +343,7 @@ export default function AddEmployee() {
 
 
     return (
-        <div className="c-signup">
+        <div className="c-signupemp">
           
                 <Container>
 
@@ -649,11 +651,11 @@ export default function AddEmployee() {
 
                                             <tr>
                                                 <td >
-                                                    <button type="submit"  id="c-allbtn1" disabled={info.isFormValid ? false : true} onClick={(e) => { sendData(e) }}
+                                                    <button type="submit" id="c-allbtn1" disabled={info.isFormValid ? false : true} onClick={(e) => { sendData(e) }}
                                                         className="btn  btn-block  ">Register</button>
                                                 </td>
                                                 <td>
-                                                    <button type="reset" className="btn  btn-block  "  id="c-allbtn1" onClick={() => { dispatch({ type: 'reset' }) }}  >Reset</button>
+                                                    <button type="reset" className="btn  btn-block  " id="c-allbtn1" onClick={() => { dispatch({ type: 'reset' }) }}  >Reset</button>
                                                 </td>
                                             </tr>
                                         </table>
@@ -661,7 +663,7 @@ export default function AddEmployee() {
                                     </div>
                                 </form>
                             </div>
-                            <p>{JSON.stringify(info)}</p>
+                            {/* <p>{JSON.stringify(info)}</p> */}
 
                             {/* </div> */}
                         </Col>

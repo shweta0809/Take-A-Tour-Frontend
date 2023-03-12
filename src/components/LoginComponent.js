@@ -4,6 +4,7 @@ import { json, useNavigate } from 'react-router-dom';
 import { login } from './slice';
 
 import '../CSS/loginstyle.css';
+import NavbarComponent from './NavbarComponent';
 
 export default function LoginComponent() 
 {
@@ -168,6 +169,8 @@ const gotoHome = () =>
 
     return (
       <div className='c-loginbox'>
+
+        <NavbarComponent ></NavbarComponent>
         <h1>  Login Form </h1>
 
         <div className="login">

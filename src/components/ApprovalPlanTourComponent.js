@@ -19,7 +19,7 @@ export default function ApprovePlanTour() {
       else{
           setMsg("")
       }
-      },[]);  // load without refresh
+      },[msg]);  // load without refresh
   
 
 console.log(approvepack)
@@ -68,7 +68,7 @@ console.log(approvepack)
            
             <Container fluid>
                 <Row>
-                    <Col>
+                    <Col md={12}>
                         <h1>Approve Planned Tours</h1>
                         <table className="c-disppackagetable">
                             <tr>
@@ -114,12 +114,7 @@ console.log(approvepack)
                 </Row>
             </Container>
 
-        </div>
+        </div>
 
-    )
+    )
 }
-
-
-
-
-
