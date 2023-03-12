@@ -61,7 +61,7 @@ export default function BookTour(props) {
         travellernumber: { value:1, hasError: false, touched: true, error: "" },
          paymenttype: { value:"", hasError: true, touched: false, error: "" },
         // status:0,
-        isFormValid: false
+        isFormValid: false
          }
 
         
@@ -178,7 +178,7 @@ export default function BookTour(props) {
              gender: { value:"", hasError: true, touched: false, error: "" },
     
             // status:0,
-            isFormValidtrav: false
+            isFormValidtrav: false
              }
     
 
@@ -533,7 +533,7 @@ var msg="";
                                     <td>
                                     <h5>  <BsCurrencyRupee />
                                       {/* {selectedtour.packageidobj.packageprice}  */}
-                                      {totamount}
+                                      {totamount} /-
                                      </h5>
                                     </td>
                                 
@@ -554,7 +554,7 @@ var msg="";
                                 </tr>
                                 <tr >
                                 <td>
-                                    <Form.Label>Select paymnt type :</Form.Label>
+                                    <Form.Label>Select Payment Type :</Form.Label>
                                     </td>
                                    
                                     <td>
@@ -563,7 +563,7 @@ var msg="";
                                      onChange={(e) => { onInputChange("paymenttype", e.target.value, dispatch) }}
                                      onBlur={(e) => { onFocusOut("paymenttype", e.target.value, dispatch) }}       
                                      required   >
-                                    <option> paymnt type</option>
+                                    <option> Payment Type</option>
                                     <option value="UPI">UPI</option>
                                     <option value="Net Banking">Net Banking</option>
                                     <option value="Card Payment">Card Payment</option>
@@ -606,7 +606,7 @@ var msg="";
                                  <tr>
                                            
                                     <td>
-                                    <Form.Label>Enter first name :</Form.Label>
+                                    <Form.Label>Enter First Name :</Form.Label>
                                     </td>
                                    
                                     <td>
@@ -622,7 +622,7 @@ var msg="";
                                 </tr>
                                 <tr>
                                     <td>
-                                    <Form.Label>Enter last name  :</Form.Label>
+                                    <Form.Label>Enter Last Name  :</Form.Label>
                                     </td>
                                    
                                     <td>
@@ -660,7 +660,7 @@ var msg="";
                                 </tr>
                                 <tr>
                                     <td>
-                                    <Form.Label>Select birthdate :</Form.Label>
+                                    <Form.Label>Select Birthdate :</Form.Label>
                                     </td>
                                    
                                     <td>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import logo1 from "../Images/airplane.png";
 
 export default function NavbarComponent() 
 {
@@ -74,6 +75,7 @@ export default function NavbarComponent()
               <div className="container-fluid ">  
     
                 <div className="c-webname">
+                  <img src={logo1} height="40px" width="40px"></img>&ensp;
                   Take A Tour
                 </div>
     
@@ -104,5 +106,3 @@ export default function NavbarComponent()
           </div>
       )
 }
-
-

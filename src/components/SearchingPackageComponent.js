@@ -95,12 +95,21 @@ export default function SearchingPackage()
            alert("Please Login to Book Tour");
            
       }
-      else
-      {      
+      else 
+      {    
+        console.log(allpackages[i].availseats); 
+
+        if(allpackages[i].availseats==0)
+        {
+          alert("Tour is already booked");
+        } 
+        else
+        { 
           console.log(allpackages[i]);
           const onepackge=allpackages[i];
           localStorage.setItem("packageforBookTour",JSON.stringify(allpackages[i]));
           navigate("/booktour",{state :{onepackge}});
+        }
       }
     
 
@@ -332,7 +341,7 @@ export default function SearchingPackage()
                     </table>
                   </div>
                   <div className="c-2divinfo">
-                    <h3>description</h3>
+                    <h3>Description</h3>
                     <div><h5>{allpk.packageidobj.description}</h5>
 
                     </div>

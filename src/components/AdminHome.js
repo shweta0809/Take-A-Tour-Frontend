@@ -5,6 +5,7 @@ import "../CSS/HomeStyle.css";
 import ApprovePlanTour from "./ApprovalPlanTourComponent";
 import { useSelector } from 'react-redux';
 import NavbarComponent from "./NavbarComponent";
+import logo1 from "../Images/airplane.png";
 
 export default function AdminHome() {
 
@@ -22,6 +23,7 @@ export default function AdminHome() {
                 <div className="container-fluid ">
 
                     <div className="c-webname">
+                    <img src={logo1} height="40px" width="40px"></img>&ensp;
                         Take A Tour
                     </div>
 

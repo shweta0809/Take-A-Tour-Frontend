@@ -4,6 +4,7 @@ import "../CSS/Style.css"
 import DisplayPackageForEmp from './DisplayPackageForEmpComponent';
 import { Row,Col, Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import logo1 from "../Images/airplane.png";
 
 export default function EmployeeHome() {
     // here saving info of logged tourist
@@ -50,6 +51,7 @@ export default function EmployeeHome() {
                     <div className="container-fluid ">
 
                         <div className="c-webname">
+                        <img src={logo1} height="40px" width="40px"></img>&ensp;
                             Take A Tour
                         </div>
 
@@ -66,9 +68,7 @@ export default function EmployeeHome() {
                                 <Link to="plantour" className="c-navlink px-3">Plan Tour</Link>
                             </li> */}
 
-                            <li className="nav-item">
-                                <Link to="addpackage" className="c-navlink px-3">Profile</Link>
-                            </li>
+                           
                             <li className="nav-item ">
                                 <Link to="logout" className="c-navlink px-3">Logout</Link>
                             </li>

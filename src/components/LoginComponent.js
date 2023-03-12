@@ -2,7 +2,7 @@ import { useReducer,useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { json, useNavigate } from 'react-router-dom';
 import { login } from './slice';
-
+import {BiHide} from "react-icons/bi"
 import '../CSS/loginstyle.css';
 import NavbarComponent from './NavbarComponent';
 
@@ -164,9 +164,16 @@ const gotoHome = () =>
    navigate("/");
 
 }
-      
+const [passwordType, setPasswordType] = useState("password");
 
-
+const togglePassword =()=>{
+  if(passwordType==="password")
+  {
+   setPasswordType("text")
+   return;
+  }
+  setPasswordType("password")
+}
     return (
       <div className='c-loginbox'>
 
@@ -177,12 +184,13 @@ const gotoHome = () =>
         <form  name="suform" id="supform" > 
             <input type="text" placeholder="user id" name ="uid" id="uid" value={info.uid}
              onChange={(e)=>{dispatch({type:'update',fld:"uid", val: e.target.value})}}  />
-             <div id="" className="form-text">we will never share any info</div>
+             <div id="" className="form-text">Enter User ID</div>
 
-            <input type="password" placeholder="password" name="pwd" id="pwd"  value={info.pwd} 
+            <input type={passwordType } class="form-control" placeholder="password" name="pwd" id="pwd"  value={info.pwd} 
             onChange={(e)=>{dispatch({type:'update',fld:"pwd", val:e.target.value})}}  />
-            <div id="" className="form-text">we will never share any info</div>
-
+            <div id="" className="form-text">Enter Password</div>
+            <button className="btn btn-outline-primary" type="button" onClick={togglePassword}><BiHide></BiHide>
+            </button>
             <p className='msg'>{msg}</p>
             <button type="submit" id="btn"  onClick={(e)=>{sendData(e)}} 
             onMouseOver={(e)=>{Moving(e)}} >Login</button> 

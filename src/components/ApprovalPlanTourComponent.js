@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; 
+import {BsCurrencyRupee} from "react-icons/bs"
 
 export default function ApprovePlanTour() {
 
@@ -93,7 +94,7 @@ console.log(approvepack)
                                         <td>{allpk.availseats}</td>
                                         <td>{allpk.lastdate_apply}</td>
                                         
-                                        <td>{allpk.packageidobj.packageprice}</td>
+                                        <td>  <BsCurrencyRupee />{allpk.packageprice} /-</td>
                                         <td>{allpk.packageidobj.locations}</td>
                                        
                                         <td>  
@@ -109,12 +110,12 @@ console.log(approvepack)
                                 })
                             }
                         </table>
-                            <h3>{msg}</h3>
+                            {/* <h3>{msg}</h3> */}
                     </Col>
                 </Row>
             </Container>
 
-        </div>
+        </div>
 
-    )
+    )
 }

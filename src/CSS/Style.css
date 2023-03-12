@@ -327,13 +327,17 @@ ul li .c-navlink{
 .c-footermainclass
 {
   margin-top : 10px;
-    /* border : 1px solid palevioletred; */
-}
+   /* border : 1px solid palevioletred; */
+} 
 
 
-.c-footerdivhappycust
+.c-footerdivhappycust img
 {
-   background-image: url("../Images/footerimage.png");
+  /* background-repeat: no-repeat; */
+  /* background-size: cover;
+   */
+   height: 250px;
+   width : 450px;
 }
 /* .c-footerdescription
 {

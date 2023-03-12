@@ -30,7 +30,8 @@ export default function FooterComponent() {
                     <Col xs={6} md={4}>
                         <div className="c-footerdiv">
                             <div className="c-footerdivhappycust" >
-                              
+                              {/* <h5>वसुधैव कुटुम्बकम्</h5> */}
+                              <img src={happy} height="250px" width="400px"/>
                             </div>
                         </div>
 
