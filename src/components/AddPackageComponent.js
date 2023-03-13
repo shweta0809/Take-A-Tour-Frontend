@@ -14,7 +14,8 @@ export default function AddPackageComponent() {
     "tourist_capacity": 0,
     "description": "",
     "locations": "",
-    "boardinglocation":""
+    "boardinglocation":"",
+    "duration":""
   }
   const reducer = (state, action) => {
     switch (action.type) {
@@ -176,8 +177,15 @@ export default function AddPackageComponent() {
             <Form.Control className="mb-3" size="lg" type="number" placeholder="tourist_capacity" name="tourist_capacity" id="tourist_capacity"
               onChange={(e) => { dispatch({ type: 'update', fld: "tourist_capacity", val: e.target.value }) }} required />
           </Form.Group>
-          <Form.Group>
 
+          <Form.Group>
+            
+            <Form.Control className="mb-3" size = "lg" type="text" placeholder="duration" name="duration" id="duration" 
+                onChange={(e) => { dispatch({ type: 'update', fld: "duration", val: e.target.value }) }}            
+                            required />
+            </Form.Group>
+
+              <Form.Group>
             <Form.Control className="mb-3" size="lg" type="text" placeholder="description" name="description" id="description"
               onChange={(e) => { dispatch({ type: 'update', fld: "description", val: e.target.value }) }} required />
           </Form.Group>

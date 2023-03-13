@@ -32,7 +32,7 @@ export default function SignUpTouristComponent() {
                 let regex = /^[A-Za-z0-9]{6,15}$/;
                 if (!regex.test(value)) {
                     hasError = true;
-                    error = "Uid Should be between 6 - 15 characters"
+                    error = "UserId Should be between 6 - 15 characters"
                 }
                 break;
             case "pwd":
@@ -107,14 +107,14 @@ export default function SignUpTouristComponent() {
                     error = "Enter valid postalcode"
                 }
                 break;
-            case "state":
-                let regex10 = /^[A-Za-z\s]{1,}$/;
-
-                if (!regex10.test(value)) {
-                    hasError = true;
-                    error = "Enter valid State "
-                }
-                break;
+                case "state":
+                    let regex10 = /^[A-Za-z\s]{1,}$/;
+    
+                    if (!regex10.test(value)) {
+                        hasError = true;
+                        error = "Enter valid State "
+                    }
+               break;
             case "country":
                 let regex11 = /^[A-Za-z\s]{1,}$/;
 
@@ -248,7 +248,7 @@ export default function SignUpTouristComponent() {
            //.then(data => setMsg(data))
            .then(resp => {if(resp.ok)
             { 
-                alert("Regitration Successful")
+                alert("Registration Successful")
                 navigate("/login")
               return resp.text();
             }

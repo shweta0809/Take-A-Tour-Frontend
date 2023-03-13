@@ -44,9 +44,12 @@ export default function DisplayPackageForEmp() {
     //  }
 
 
-     const goToplantour = (id) =>{
-        localStorage.setItem("packageidforplantour",id)
-        navigate("plantour")
+     const goToplantour = (i) =>{
+
+        // localStorage.setItem("packageidforplantour",id)
+        console.log(allpackages[i]);
+        const forplan = allpackages[i];
+        navigate("plantour",{state :{forplan}});
      }
 
      const deletePackage =(id) =>
@@ -77,6 +80,7 @@ export default function DisplayPackageForEmp() {
                 // }
                 if(Object.keys(obj).length===0)
                 {
+
                     alert("Package deleted successfully");
                 }
                 else{
@@ -97,7 +101,7 @@ export default function DisplayPackageForEmp() {
                             <tr>
                                 <th>Package ID</th>
                                 <th>Package Name</th>
-                                
+                                <th>Duration</th>
                                 <th>Tourist Capacity</th>
                                 <th>Description</th>
                                 <th>Boarding location</th>
@@ -109,11 +113,11 @@ export default function DisplayPackageForEmp() {
                             
                             </tr>
                             {
-                                allpackages.map(allpk => {
+                                allpackages.map((allpk,i) => {
                                     return <tr>
                                         <td>{allpk.package_id}</td>
                                         <td><b>{allpk.packagename}</b></td>
-                                
+                                        <td>{allpk.duration} Days</td>
                                         <td>{allpk.tourist_capacity}</td>
                                         <td>{allpk.description}</td>
                                         <td>{allpk.boardinglocation}</td>
@@ -139,7 +143,7 @@ export default function DisplayPackageForEmp() {
                                                         className="mySwiper"
                                                         
                                                     >
-                                            {/* // Using array */}
+                                            // Using array
 
 
                                                         { allpk.packimageobj.map((img, i) => {
@@ -156,7 +160,7 @@ export default function DisplayPackageForEmp() {
                                         </td>
                                         <td>
                
-                                            <button className="btn  btn-block" id="c-displanbtn" onClick={() => goToplantour(allpk.package_id)}>Plan</button>
+                                            <button className="btn  btn-block" id="c-displanbtn" onClick={() => goToplantour(i)}>Plan</button>
                                                  {/* localStorage.setItem("loggedinfo",JSON.stringify(obj)) */}
                                         </td>
                                          <td>

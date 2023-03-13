@@ -70,7 +70,8 @@ export default function SearchingPackage()
      }
      const [info,dispatch] =useReducer(reducer,init);
 
-   
+     console.log( info.location);
+     console.log( info.boardinglocation);
     const sendData1= (e) => {
 
       
@@ -120,7 +121,7 @@ if(info.location != ""  && info.boardinglocation != "")
     locbtn=1;
    
   }
- 
+  
   var datebtn=0;
   var todaysDate=new Date()
   var startdate1=new Date(startdate)
@@ -129,7 +130,6 @@ if(startdate1>todaysDate)
     datebtn=1;
     
   }
-
 
   return (
     <div >
