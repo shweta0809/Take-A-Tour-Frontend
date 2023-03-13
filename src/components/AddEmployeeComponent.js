@@ -143,7 +143,7 @@ export default function AddEmployee() {
                 }
                 break;
             case "state":
-                let regex10 = /^[A-Za-z]{1,}$/;
+                let regex10 = /^[A-Za-z\s]{1,}$/;
 
                 if (!regex10.test(value)) {
                     hasError = true;
@@ -151,7 +151,7 @@ export default function AddEmployee() {
                 }
                 break;
             case "country":
-                let regex11 = /^[A-Za-z]{1,}$/;
+                let regex11 = /^[A-Za-z\s]{1,}$/;
 
                 if (!regex11.test(value)) {
                     hasError = true;

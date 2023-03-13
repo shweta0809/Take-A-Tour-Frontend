@@ -61,21 +61,25 @@ export default function DisplayPackageForEmp() {
             }
           else
             {
-               
-
                console.log("server error")
               throw  new Error("server error")  
             }
           })
           .then(text => text.length ? JSON.parse(text):{})
-        .then(obj =>  {
-                console.log(obj);
-                
-                if(obj==null)
+        .then(obj => {
+                // console.log(obj);           
+                // if(obj==null)
+                // {
+                //     alert("Package deleted successfully");
+                // }
+                // {
+                //     alert("Tour is ongoing can not delete");
+                // }
+                if(Object.keys(obj).length===0)
                 {
                     alert("Package deleted successfully");
                 }
-                {
+                else{
                     alert("Tour is ongoing can not delete");
                 }
         })
@@ -135,7 +139,7 @@ export default function DisplayPackageForEmp() {
                                                         className="mySwiper"
                                                         
                                                     >
-                                            // Using array
+                                            {/* // Using array */}
 
 
                                                         { allpk.packimageobj.map((img, i) => {

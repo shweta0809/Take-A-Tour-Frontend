@@ -70,8 +70,7 @@ export default function SearchingPackage()
      }
      const [info,dispatch] =useReducer(reducer,init);
 
-     console.log( info.location);
-     console.log( info.boardinglocation);
+   
     const sendData1= (e) => {
 
       
@@ -115,7 +114,21 @@ export default function SearchingPackage()
 
 }
 
-
+var locbtn=0;
+if(info.location != ""  && info.boardinglocation != "")
+  {
+    locbtn=1;
+   
+  }
+ 
+  var datebtn=0;
+  var todaysDate=new Date()
+  var startdate1=new Date(startdate)
+if(startdate1>todaysDate)
+  {
+    datebtn=1;
+    
+  }
 
 
   return (
@@ -147,7 +160,7 @@ export default function SearchingPackage()
                     type="button"
                     onClick={(e) => {
                       sendData(e);
-                    }}
+                    }} disabled={ datebtn ? false : true}
                   >
                     search by date
                   </Button>
@@ -191,8 +204,8 @@ export default function SearchingPackage()
                     id="btnsearch"
                     type="button"
                     onClick={(e) => {
-                      sendData1(e);
-                    }}
+                      sendData1(e); 
+                    }} disabled={ locbtn ? false : true}
                   >
                     search by location
                   </Button>

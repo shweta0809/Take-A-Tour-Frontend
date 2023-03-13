@@ -6,21 +6,21 @@ import {BsCurrencyRupee} from "react-icons/bs"
 export default function ApprovePlanTour() {
 
     const [approvepack, setApprovepack] = useState([]);
-    const[msg,setMsg]=useState("")
+    // const[msg,setMsg]=useState("")
     useEffect(() => {
         fetch("http://localhost:8080/getallplantour")
               .then(resp => resp.json())
               .then(pkgs => setApprovepack(pkgs))
              
             
-      if(approvepack.length == 0)
-      {
-          setMsg("No approval pending")
-      }
-      else{
-          setMsg("")
-      }
-      },[msg]);  // load without refresh
+    //   if(approvepack.length == 0)
+    //   {
+    //       setMsg("No approval pending")
+    //   }
+    //   else{
+    //       setMsg("")
+    //   }
+      },[]);  // load without refresh
   
 
 console.log(approvepack)

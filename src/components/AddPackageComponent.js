@@ -138,6 +138,21 @@ export default function AddPackageComponent() {
 
   }
 
+   var imgbtn = 0;
+   var formbtn = 0;
+  if(file != null  && pacid != 0)
+  {
+    imgbtn=1;
+    console.log("image not selected");
+  }
+ 
+  if(info.packagename != "" && info.tourist_capacity > 0 && info.description !="" &&  info.locations !="" && info.boardinglocation !="")
+  {
+    formbtn=1;
+    console.log("packagename not selected");
+  }
+    
+
 
   return (
     <div >
@@ -183,7 +198,7 @@ export default function AddPackageComponent() {
 
 
 
-          <Button variant="primary" type="submit" onClick={(e) => { sendDatapack(e) }} >
+          <Button variant="primary" type="submit" onClick={(e) => { sendDatapack(e) }} disabled={ formbtn ? false : true}>
             Click here to Add Package
           </Button>
         </Form>
@@ -192,12 +207,11 @@ export default function AddPackageComponent() {
           <Form.Group>
 
             <Form.Control className="mb-3" size="lg" type="file" placeholder="packageimages" name="packageimages" id="packageimages"
-              onChange={(e) => { setFile(e.target.files[0]) }}
-              multiple required />
+              onChange={(e) => { setFile(e.target.files[0]) }}  required />
           </Form.Group>
 
 
-          <Button variant="primary" type="submit" onClick={(e) => { sendDataimg(e) }} >
+          <Button variant="primary" type="submit" onClick={(e) => { sendDataimg(e) }}  disabled={ imgbtn ? false : true}>
             Click here to Add Package
           </Button>
 

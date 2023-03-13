@@ -42,7 +42,6 @@ export default function NavbarComponent()
         }
       else
         {
-       
           throw  new Error("server error")  
         }
       })

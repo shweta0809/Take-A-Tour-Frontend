@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../CSS/Style.css"
+import NavbarComponent from './NavbarComponent';
 export default function ForgetPassword() {
 
 
@@ -32,10 +33,11 @@ export default function ForgetPassword() {
         return(
 
             <div>
+              <NavbarComponent/>
                    <div className='c-forgetpwddiv'>   
                         <form>
                             <h5>Forgot Password</h5>
-                            <input type="text" name="uid" id="uid" placeholder='UserIsd'  onChange={(e) => {setUserid(e.target.value)}}></input>
+                            <input type="text" name="uid" id="uid" placeholder='UserId'  onChange={(e) => {setUserid(e.target.value)}}></input>
                             <button type="button" id="c-forgetbtn" onClick={(e)=>{sendData(e)}}  >submit</button> 
                         </form>
 
