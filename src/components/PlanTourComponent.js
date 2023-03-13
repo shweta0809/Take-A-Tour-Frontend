@@ -32,12 +32,12 @@ export default function PlanTourComponent(){
 
     const init = {
       startdate: { value: "", hasError: true, touched: false, error: "" },
-      lastdate: { value: "", hasError: false, touched: true, error: "" }, 
+      // lastdate: { value: "", hasError: false, touched: true, error: "" }, 
       lastdate_apply: { value: "", hasError: true, touched: false, error: "" },
-      duration: { value: "", hasError: false, touched: true, error: "" },
-      availseats:{ value: 0, hasError: false, touched: true, error: "" },
-      employeeid:{ value: 0, hasError: false, touched: true, error: "" },
-      packageidobj:{ value: 0, hasError: false, touched: true, error: "" },
+      // duration: { value: "", hasError: false, touched: true, error: "" },
+      // availseats:{ value: 0, hasError: false, touched: true, error: "" },
+      // employeeid:{ value: 0, hasError: false, touched: true, error: "" },
+      // packageidobj:{ value: 0, hasError: false, touched: true, error: "" },
       packageprice:{value: 0, hasError: true, touched: false, error: ""},
       // status:0,
       isFormValid: false
@@ -168,7 +168,7 @@ export default function PlanTourComponent(){
    // var days1=duration1*86400000
     var lastdate1=new Date(info.startdate.value)
   
- lastdate1.setDate(lastdate1.getDate()+duration1)
+lastdate1.setDate(lastdate1.getDate()+duration1)
 console.log(lastdate1)
 var lastdate11=new Date(lastdate1)
 let lastdate111 = lastdate11.getDate() + '-' + parseInt(lastdate11.getMonth() + 1) + '-' + lastdate11.getFullYear()
@@ -193,7 +193,7 @@ console.log(lastdate111)
      switch (name) {
          case "startdate":
          
-            if(startdate1<todaysDate)
+            if(startdate1<todaysDate || value=="")
             {
                  hasError = true;
                  error = "Starting date Should be after Today"
@@ -203,7 +203,7 @@ console.log(lastdate111)
            break;
       
         case "lastdate_apply" :
-          if(lastdateapply1>=startdate1)
+          if(lastdateapply1>=startdate1 || value=="")
           {
             hasError = true;
             error = "Last Date to apply should be before start date"
@@ -211,13 +211,13 @@ console.log(lastdate111)
       }
         break;
            case "packageprice":
-            if(value<0)
+            if(value<0 || value=="")
             {
               hasError = true;
                 error = "Price Should be valid"
             }
            break;
-          
+           default :
            }
            return { hasError, error }
      }
@@ -247,8 +247,8 @@ console.log(lastdate111)
                         </Col>
                         </Form.Group>
                     
-                        
-                        <fieldset disabled>                        
+                     
+                        <fieldset disabled>                      
                         <Form.Group>
                         <Col >
                         <Form.Label>Last Date</Form.Label>
@@ -308,7 +308,7 @@ console.log(lastdate111)
                         <Form.Control className="mb-3" size = "lg" type="number" placeholder="packageidobj" name="packageidobj" id="packageidobj" 
                                         value={selectedpkg.package_id}
                                         
-                                        onBlur={(e) => { onFocusOut("packageidobj", e.target.value, dispatch) }}
+                                        // onBlur={(e) => { onFocusOut("packageidobj", e.target.value, dispatch) }}
                           />
                         </Form.Group>
 

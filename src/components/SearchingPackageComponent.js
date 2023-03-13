@@ -329,7 +329,7 @@ if(startdate1>todaysDate)
                           <h5>Duration</h5>
                         </td>
                         <td>
-                          <h5>{allpk.duration}</h5>
+                          <h5>{allpk.packageidobj.duration}</h5>
                         </td>
                       </tr>
                       <tr>

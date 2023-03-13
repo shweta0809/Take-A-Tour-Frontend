@@ -688,7 +688,7 @@ var msg="";
                                 </tr>
                                    <tr className="c-finalbookbutton" >
                                    <td colSpan={2}>
-                                   <button type="button" className="btn  btn-block" id="c-getinvoicebutton" disabled={ (invoice>1) ? true : false} onClick={(e) => { getinvoice()}}>get Invloice</button>
+                                   <button type="button" className="btn  btn-block" id="c-getinvoicebutton" disabled={ (invoice>1) ? true : false} onClick={(e) => { getinvoice()}}>get Invoice</button>
 
                                    </td>
                                 </tr>

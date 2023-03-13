@@ -146,7 +146,7 @@ export default function SignUpTouristComponent() {
 
 
     const reducer = (state, action) => {
-        //console.log(state);
+        console.log(action);
         switch (action.type) {
             case 'update': {
                 const { name, value, hasError, error, touched, isFormValid } = action.data;
